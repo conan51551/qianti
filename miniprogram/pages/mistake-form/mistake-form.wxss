@@ -1,0 +1,1 @@
+.page{padding:32rpx;background:#f7f8fa;min-height:100vh}.field{background:#fff;padding:24rpx;margin-bottom:18rpx;border-radius:14rpx;display:flex;align-items:center;gap:20rpx}.field text{color:#555;min-width:180rpx}.field input{flex:1}.block{display:block}.block text{display:block;margin-bottom:16rpx}.block textarea{width:100%;min-height:140rpx;box-sizing:border-box}

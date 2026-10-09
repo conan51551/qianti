@@ -1,0 +1,12 @@
+{
+  "name": "xiaocuotiji",
+  "private": true,
+  "scripts": {
+    "dev:api": "tsx apps/api/src/server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsx": "latest",
+    "typescript": "latest"
+  }
+}

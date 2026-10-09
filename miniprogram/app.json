@@ -1,0 +1,7 @@
+{
+  "pages": ["pages/index/index", "pages/mistake-form/mistake-form"],
+  "window": { "navigationBarTitleText": "小错题家", "navigationBarBackgroundColor": "#ffffff", "navigationBarTextStyle": "black" },
+  "cloud": true,
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
