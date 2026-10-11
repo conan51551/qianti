@@ -1,1 +1,122 @@
-page{background:#f4f7f3;color:#263d32}.page{padding:40rpx 32rpx 70rpx}.eyebrow{font-size:23rpx;color:#788c7e;letter-spacing:3rpx}.title{display:block;font-size:48rpx;font-weight:700;margin:12rpx 0}.subtitle{font-size:26rpx;color:#859389;line-height:1.7}.group{margin-top:40rpx}.group-title{display:flex;justify-content:space-between;font-size:32rpx;font-weight:700}.point{padding:26rpx;margin-top:18rpx}.point-head{display:flex;justify-content:space-between}.point-name{font-size:31rpx;font-weight:600;color:#23805e}.count,.muted{font-size:22rpx;color:#8a978e}.module,.description,.prereq{display:block;margin-top:14rpx;font-size:25rpx;line-height:1.7;color:#617269}.module{color:#398364}.empty{text-align:center;padding:60rpx 24rpx}
+/* ============================================
+   知识大纲页 — Apple Design Language
+   ============================================ */
+
+.nav-area {
+  padding: 20rpx 8rpx 0;
+}
+
+/* Knowledge Group */
+.knowledge-group {
+  margin-top: 48rpx;
+}
+
+.knowledge-group__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.knowledge-group__title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: var(--color-label);
+  letter-spacing: -0.5rpx;
+}
+
+.knowledge-group__count {
+  font-size: 26rpx;
+  color: var(--color-label-secondary);
+}
+
+/* Knowledge Point (inside group card) */
+.knowledge-point {
+  padding: 32rpx 36rpx;
+  position: relative;
+}
+
+.knowledge-point::after {
+  content: '';
+  position: absolute;
+  left: 36rpx;
+  right: 0;
+  bottom: 0;
+  height: 1rpx;
+  background: var(--color-separator);
+}
+
+.knowledge-point:last-child::after {
+  display: none;
+}
+
+.knowledge-point__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.knowledge-point__name {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--color-primary);
+  flex: 1;
+}
+
+.knowledge-point__badge {
+  background: rgba(0, 122, 255, 0.1);
+  color: var(--color-primary);
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 6rpx 20rpx;
+  border-radius: 100rpx;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+/* Knowledge Point Body */
+.knowledge-point__body {
+  margin-top: 16rpx;
+}
+
+.knowledge-point__row {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.knowledge-point__label {
+  font-size: 26rpx;
+  color: var(--color-label-secondary);
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.knowledge-point__value {
+  font-size: 28rpx;
+  color: var(--color-green);
+  font-weight: 500;
+}
+
+.knowledge-point__desc {
+  display: block;
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: var(--color-label);
+  margin: 12rpx 0;
+}
+
+.knowledge-point__prereq {
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+  margin-top: 8rpx;
+}
+
+.knowledge-point__prereq-list {
+  font-size: 26rpx;
+  color: var(--color-label-secondary);
+  flex: 1;
+}

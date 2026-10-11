@@ -1,1 +1,64 @@
-<view class="page"><text class="eyebrow">学习地图</text><text class="title">{{subject==='全部'?'知识大纲':subject+'知识大纲'}}</text><text class="subtitle">来自已收录错题的知识点整理</text><view wx:if="{{loading}}" class="card empty">正在整理知识点…</view><view wx:elif="{{error}}" class="card empty"><text>暂时无法读取知识大纲</text><button bindtap="load">重新加载</button></view><view wx:elif="{{empty}}" class="card empty"><text>还没有可展示的知识点</text><text class="subtitle">完成错题分析后，知识点会自动出现在这里</text></view><view wx:for="{{groups}}" wx:key="subject" class="group"><view class="group-title"><text>{{item.subject}}</text><text class="muted">{{item.points.length}} 个知识点</text></view><view wx:for="{{item.points}}" wx:key="name" class="point card"><view class="point-head"><text class="point-name">{{item.name}}</text><text class="count">{{item.count}}题</text></view><text class="module">知识模块：{{item.module}}</text><text class="description">知识点内容：{{item.description}}</text><text wx:if="{{item.prerequisites.length}}" class="prereq">前置知识：{{item.prerequisites.join('、')}}</text></view></view></view>
+<view class="page">
+  <!-- Large Title -->
+  <view class="nav-area">
+    <text class="large-title">{{subject === '全部' ? '知识大纲' : subject + '知识大纲'}}</text>
+    <text class="large-title-subtitle">来自已收录错题的知识点整理</text>
+  </view>
+
+  <!-- Loading State -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text>正在整理知识点…</text>
+  </view>
+
+  <!-- Error State -->
+  <view wx:elif="{{error}}" class="empty-state">
+    <text class="empty-state__icon">⚠︎</text>
+    <text class="empty-state__title">暂时无法读取知识大纲</text>
+    <button class="btn-primary" style="width: 400rpx; margin-top: 32rpx;" bindtap="load">重新加载</button>
+  </view>
+
+  <!-- Empty State -->
+  <view wx:elif="{{empty}}" class="empty-state">
+    <text class="empty-state__icon">📚</text>
+    <text class="empty-state__title">还没有可展示的知识点</text>
+    <text class="empty-state__subtitle">完成错题分析后，知识点会自动出现在这里</text>
+  </view>
+
+  <!-- Knowledge Groups -->
+  <view wx:for="{{groups}}" wx:key="subject" class="knowledge-group">
+    <!-- Group Header -->
+    <view class="knowledge-group__header">
+      <text class="knowledge-group__title">{{item.subject}}</text>
+      <text class="knowledge-group__count">{{item.points.length}} 个知识点</text>
+    </view>
+
+    <!-- Knowledge Points -->
+    <view class="group-card">
+      <view 
+        wx:for="{{item.points}}" 
+        wx:key="name" 
+        class="knowledge-point"
+      >
+        <!-- Point Header -->
+        <view class="knowledge-point__header">
+          <text class="knowledge-point__name">{{item.name}}</text>
+          <text class="knowledge-point__badge">{{item.count}}题</text>
+        </view>
+
+        <!-- Point Details -->
+        <view class="knowledge-point__body">
+          <view class="knowledge-point__row">
+            <text class="knowledge-point__label">模块</text>
+            <text class="knowledge-point__value">{{item.module}}</text>
+          </view>
+          <text class="knowledge-point__desc">{{item.description}}</text>
+          <view wx:if="{{item.prerequisites.length}}" class="knowledge-point__prereq">
+            <text class="knowledge-point__label">前置知识</text>
+            <text class="knowledge-point__prereq-list">{{item.prerequisites.join('、')}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

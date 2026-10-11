@@ -1,1 +1,119 @@
-<view class="page"><text class="eyebrow">一点一点，学得更好</text><text class="title">我的错题本</text><text class="subtitle">把每一次出错，变成下一次进步。</text><view class="summary"><view><text class="count">{{mistakes.length}}</text><text class="summary-label">道已收录错题</text></view><van-button type="primary" size="small" icon="plus" bindtap="toAdd">新增错题</van-button></view><view class="row section"><text>最近收录</text><text class="outline-entry" bindtap="openKnowledge">知识大纲 →</text></view><scroll-view scroll-x class="subject-tabs"><text wx:for="{{subjects}}" wx:key="*this" class="subject-tab {{activeSubject===item?'active':''}}" data-subject="{{item}}" bindtap="filterSubject">{{item}}</text></scroll-view><view wx:if="{{loading}}" class="card empty">正在翻开错题本…</view><view wx:elif="{{error}}" class="card empty"><text>暂时无法读取错题</text><text class="subtitle">请检查云服务配置后重试</text><button bindtap="loadMistakes">重新加载</button></view><view wx:elif="{{!mistakes.length}}" class="card empty"><text class="empty-icon">✎</text><text>你的进步，从第一道错题开始</text><text class="subtitle">点击「新增」，拍下需要复习的题目</text></view><view wx:for="{{visibleMistakes}}" wx:key="_id" class="card" bindtap="openDetail" data-id="{{item._id}}"><view class="row"><text class="pill">{{item.subject}} · {{item.grade}}</text><view class="card-actions"><text class="muted">{{item.createdAtText}}</text><van-button class="delete-btn" type="danger" plain size="mini" icon="delete-o" catchtap="deleteMistake" data-id="{{item._id}}">删除</van-button></view></view><image wx:if="{{item.imageFileId}}" class="thumb" src="{{item.imageFileId}}" mode="aspectFill"/><text class="question">{{item.questionText || '照片错题'}}</text><view wx:if="{{item.analysisStatus==='pending'}}" class="muted">AI 正在分析…</view><view wx:if="{{item.errorType}}" class="ai-box"><text class="ai-title">{{item.errorType}}</text><text>{{item.explanation}}</text><text class="muted">知识点：{{item.knowledgePoints}}</text></view><van-button class="gen-btn" type="success" plain size="small" icon="bulb-o" catchtap="generateQuestion" data-id="{{item._id}}">AI出相似题</van-button><text class="muted">点击查看题目与答案 →</text></view></view>
+<view class="page">
+  <!-- Large Title Header -->
+  <view class="nav-area">
+    <text class="large-title">错题本</text>
+    <text class="large-title-subtitle">把每一次出错，变成下一次进步</text>
+  </view>
+
+  <!-- Summary Card -->
+  <view class="summary-card" wx:if="{{mistakes.length > 0}}">
+    <view class="summary-card__left">
+      <text class="summary-card__count">{{mistakes.length}}</text>
+      <text class="summary-card__label">道已收录错题</text>
+    </view>
+    <view class="summary-card__action" bindtap="toAdd">
+      <view class="summary-card__btn">
+        <text class="summary-card__btn-icon">＋</text>
+      </view>
+      <text class="summary-card__btn-text">新增</text>
+    </view>
+  </view>
+
+  <!-- Subject Segmented Control -->
+  <scroll-view scroll-x class="segmented" wx:if="{{subjects.length > 1}}">
+    <view 
+      wx:for="{{subjects}}" 
+      wx:key="*this" 
+      class="segmented__item {{activeSubject === item ? 'segmented__item--active' : ''}}" 
+      data-subject="{{item}}" 
+      bindtap="filterSubject"
+    >
+      <text>{{item}}</text>
+    </view>
+  </scroll-view>
+
+  <!-- Section Header -->
+  <view class="section-header">
+    <text class="section-header__title">最近收录</text>
+    <text class="section-header__action" bindtap="openKnowledge">知识大纲</text>
+  </view>
+
+  <!-- Loading State -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text>正在翻开错题本…</text>
+  </view>
+
+  <!-- Error State -->
+  <view wx:elif="{{error}}" class="empty-state">
+    <text class="empty-state__icon">⚠︎</text>
+    <text class="empty-state__title">暂时无法读取错题</text>
+    <text class="empty-state__subtitle">请检查云服务配置后重试</text>
+    <button class="btn-primary" style="width: 400rpx; margin-top: 32rpx;" bindtap="loadMistakes">重新加载</button>
+  </view>
+
+  <!-- Empty State -->
+  <view wx:elif="{{!mistakes.length}}" class="empty-state">
+    <text class="empty-state__icon">✎</text>
+    <text class="empty-state__title">你的进步，从第一道错题开始</text>
+    <text class="empty-state__subtitle">点击「新增」，拍下需要复习的题目</text>
+  </view>
+
+  <!-- Mistake Cards -->
+  <view 
+    wx:for="{{visibleMistakes}}" 
+    wx:key="_id" 
+    class="mistake-card"
+    bindtap="openDetail" 
+    data-id="{{item._id}}"
+  >
+    <!-- Card Header -->
+    <view class="mistake-card__header">
+      <view class="mistake-card__tags">
+        <text class="pill pill--blue">{{item.subject}}</text>
+        <text class="pill">{{item.grade}}</text>
+      </view>
+      <text class="mistake-card__time">{{item.createdAtText}}</text>
+    </view>
+
+    <!-- Thumbnail -->
+    <image 
+      wx:if="{{item.imageFileId}}" 
+      class="mistake-card__thumb" 
+      src="{{item.imageFileId}}" 
+      mode="aspectFill"
+    />
+
+    <!-- Question Text -->
+    <text class="mistake-card__question">{{item.questionText || '照片错题'}}</text>
+
+    <!-- AI Analysis Status -->
+    <view wx:if="{{item.analysisStatus === 'pending'}}" class="mistake-card__status">
+      <view class="loading-spinner" style="width: 28rpx; height: 28rpx; border-width: 3rpx; margin: 0;"></view>
+      <text class="text-secondary text-small">AI 正在分析…</text>
+    </view>
+
+    <!-- AI Analysis Result -->
+    <view wx:if="{{item.errorType}}" class="mistake-card__analysis">
+      <view class="mistake-card__analysis-header">
+        <text class="mistake-card__analysis-type">{{item.errorType}}</text>
+      </view>
+      <text class="mistake-card__analysis-text">{{item.explanation}}</text>
+      <view class="mistake-card__knowledge" wx:if="{{item.knowledgePoints && item.knowledgePoints.length}}">
+        <text class="pill pill--green" wx:for="{{item.knowledgePoints}}" wx:key="*this" wx:for-item="kp">{{kp}}</text>
+      </view>
+    </view>
+
+    <!-- Card Actions -->
+    <view class="mistake-card__actions">
+      <view class="mistake-card__action" catchtap="generateQuestion" data-id="{{item._id}}">
+        <text class="mistake-card__action-icon">💡</text>
+        <text class="mistake-card__action-text">出变式题</text>
+      </view>
+      <view class="mistake-card__action mistake-card__action--danger" catchtap="deleteMistake" data-id="{{item._id}}">
+        <text class="mistake-card__action-icon">🗑</text>
+        <text class="mistake-card__action-text">删除</text>
+      </view>
+    </view>
+  </view>
+</view>

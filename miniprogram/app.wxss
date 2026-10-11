@@ -1,1 +1,370 @@
-page{background:#f4f7f3;color:#263d32;font-family:-apple-system,BlinkMacSystemFont,sans-serif} .page{padding:40rpx 32rpx 56rpx;box-sizing:border-box} .eyebrow{font-size:23rpx;color:#788c7e;letter-spacing:3rpx}.title{display:block;font-size:48rpx;font-weight:700;margin:12rpx 0}.subtitle{font-size:26rpx;color:#859389;line-height:1.7}.card{background:#fff;border-radius:28rpx;padding:30rpx;margin-top:24rpx;box-shadow:0 8rpx 30rpx rgba(45,75,51,.03)}button{font-size:28rpx;border-radius:20rpx}button::after{border:0}.primary{background:#23805e;color:#fff;margin-top:32rpx}.label{display:block;font-size:26rpx;font-weight:600;margin-bottom:18rpx}input,textarea{font-size:29rpx;line-height:1.7}textarea{width:100%;box-sizing:border-box}.muted{color:#8a978e;font-size:25rpx}.row{display:flex;justify-content:space-between;align-items:center}.pill{background:#edf5ed;color:#398364;border-radius:12rpx;padding:8rpx 16rpx;font-size:23rpx}
+/* ============================================
+   小错题家 — Apple Design Language Global Styles
+   Based on Apple Human Interface Guidelines
+   ============================================ */
+
+/* ---------- Design Tokens ---------- */
+page {
+  --color-bg: #F2F2F7;
+  --color-bg-elevated: #FFFFFF;
+  --color-card: #FFFFFF;
+  --color-primary: #007AFF;
+  --color-green: #34C759;
+  --color-orange: #FF9500;
+  --color-red: #FF3B30;
+  --color-purple: #AF52DE;
+  --color-teal: #5AC8FA;
+
+  --color-label: #1C1C1E;
+  --color-label-secondary: #8E8E93;
+  --color-label-tertiary: #C7C7CC;
+  --color-label-quaternary: #E5E5EA;
+
+  --color-separator: #E5E5EA;
+  --color-fill: #78788033;
+  --color-fill-secondary: #7878801F;
+
+  --radius-sm: 12rpx;
+  --radius-md: 20rpx;
+  --radius-lg: 28rpx;
+  --radius-xl: 44rpx;
+
+  --shadow-sm: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8rpx 32rpx rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16rpx 48rpx rgba(0, 0, 0, 0.08);
+
+  background: var(--color-bg);
+  color: var(--color-label);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", sans-serif;
+  font-size: 30rpx;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ---------- Page Container ---------- */
+.page {
+  padding: 0 32rpx 120rpx;
+  box-sizing: border-box;
+}
+
+/* ---------- Large Title (iOS Style) ---------- */
+.large-title {
+  display: block;
+  font-size: 68rpx;
+  font-weight: 800;
+  letter-spacing: -1rpx;
+  color: var(--color-label);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.large-title-subtitle {
+  display: block;
+  font-size: 30rpx;
+  color: var(--color-label-secondary);
+  margin-top: 12rpx;
+  line-height: 1.4;
+}
+
+/* ---------- Eyebrow (Section Label) ---------- */
+.eyebrow {
+  display: block;
+  font-size: 23rpx;
+  color: var(--color-label-secondary);
+  letter-spacing: 1rpx;
+  text-transform: uppercase;
+  margin-bottom: 8rpx;
+}
+
+/* ---------- Section Header ---------- */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 8rpx;
+  margin: 48rpx 0 20rpx;
+}
+
+.section-header__title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: var(--color-label);
+  letter-spacing: -0.5rpx;
+}
+
+.section-header__action {
+  font-size: 30rpx;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* ---------- Card (iOS Inset Grouped Style) ---------- */
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  padding: 36rpx;
+  margin-top: 20rpx;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Grouped List Card (iOS Settings Style) ---------- */
+.group-card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 20rpx;
+  box-shadow: var(--shadow-sm);
+}
+
+.group-card__header {
+  padding: 0 36rpx 16rpx;
+  font-size: 26rpx;
+  color: var(--color-label-secondary);
+  font-weight: 400;
+  margin-top: 28rpx;
+}
+
+.group-card__footer {
+  padding: 12rpx 36rpx 20rpx;
+  font-size: 24rpx;
+  color: var(--color-label-secondary);
+  line-height: 1.4;
+}
+
+.group-row {
+  display: flex;
+  align-items: center;
+  min-height: 112rpx;
+  padding: 0 36rpx;
+  position: relative;
+}
+
+.group-row::after {
+  content: '';
+  position: absolute;
+  left: 36rpx;
+  right: 0;
+  bottom: 0;
+  height: 1rpx;
+  background: var(--color-separator);
+}
+
+.group-row:last-child::after {
+  display: none;
+}
+
+.group-row__label {
+  flex-shrink: 0;
+  font-size: 32rpx;
+  color: var(--color-label);
+  font-weight: 400;
+  width: 160rpx;
+}
+
+.group-row__value {
+  flex: 1;
+  text-align: right;
+  font-size: 30rpx;
+  color: var(--color-label-secondary);
+}
+
+.group-row__input {
+  flex: 1;
+  text-align: right;
+  font-size: 32rpx;
+  color: var(--color-label);
+}
+
+/* ---------- Buttons ---------- */
+button {
+  font-size: 32rpx;
+  border-radius: var(--radius-lg);
+  margin: 0;
+}
+
+button::after {
+  border: 0;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  font-size: 34rpx;
+  font-weight: 600;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin-top: 40rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 122, 255, 0.25);
+}
+
+.btn-primary[disabled] {
+  opacity: 0.4;
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: var(--color-fill-secondary);
+  color: var(--color-primary);
+  border-radius: var(--radius-md);
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.btn-plain {
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+/* ---------- Pill / Tag ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6rpx 20rpx;
+  border-radius: 100rpx;
+  background: var(--color-fill-secondary);
+  font-size: 24rpx;
+  font-weight: 500;
+  color: var(--color-label-secondary);
+}
+
+.pill--blue {
+  background: rgba(0, 122, 255, 0.1);
+  color: var(--color-primary);
+}
+
+.pill--green {
+  background: rgba(52, 199, 89, 0.1);
+  color: var(--color-green);
+}
+
+.pill--orange {
+  background: rgba(255, 149, 0, 0.1);
+  color: var(--color-orange);
+}
+
+.pill--purple {
+  background: rgba(175, 82, 222, 0.1);
+  color: var(--color-purple);
+}
+
+.pill--red {
+  background: rgba(255, 59, 48, 0.1);
+  color: var(--color-red);
+}
+
+/* ---------- Text Helpers ---------- */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-label-secondary); }
+.text-tertiary { color: var(--color-label-tertiary); }
+.text-green { color: var(--color-green); }
+.text-red { color: var(--color-red); }
+.text-orange { color: var(--color-orange); }
+
+.text-bold { font-weight: 600; }
+.text-semibold { font-weight: 500; }
+.text-tiny { font-size: 24rpx; }
+.text-small { font-size: 26rpx; }
+.text-base { font-size: 30rpx; }
+.text-large { font-size: 36rpx; }
+.text-xl { font-size: 44rpx; }
+
+/* ---------- Row / Flex Helpers ---------- */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row-center {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+/* ---------- Empty State (iOS Style) ---------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 40rpx;
+  text-align: center;
+}
+
+.empty-state__icon {
+  font-size: 80rpx;
+  margin-bottom: 28rpx;
+  opacity: 0.3;
+}
+
+.empty-state__title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--color-label);
+  margin-bottom: 12rpx;
+}
+
+.empty-state__subtitle {
+  font-size: 28rpx;
+  color: var(--color-label-secondary);
+  line-height: 1.5;
+  max-width: 480rpx;
+}
+
+/* ---------- Loading State ---------- */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 40rpx;
+  color: var(--color-label-secondary);
+  font-size: 30rpx;
+}
+
+.loading-spinner {
+  width: 48rpx;
+  height: 48rpx;
+  border: 6rpx solid var(--color-separator);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 24rpx;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Inputs ---------- */
+input, textarea {
+  font-size: 32rpx;
+  color: var(--color-label);
+  line-height: 1.5;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--color-label-tertiary);
+}
+
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.6;
+}
+
+/* ---------- Separators ---------- */
+.separator {
+  height: 1rpx;
+  background: var(--color-separator);
+  margin: 0 36rpx;
+}
+
+/* ---------- Safe Area Bottom ---------- */
+.safe-area-bottom {
+  height: env(safe-area-inset-bottom);
+}

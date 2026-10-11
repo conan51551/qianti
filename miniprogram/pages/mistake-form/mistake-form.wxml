@@ -1,1 +1,70 @@
-<view class="page"><text class="eyebrow">记录今天的小发现</text><text class="title">拍下这道错题</text><text class="subtitle">让难题有迹可循，让复习更轻松。</text><view class="photo" bindtap="chooseImage"><image wx:if="{{localImage}}" src="{{localImage}}" mode="aspectFit"/><view wx:else><text class="photo-icon">＋</text><text class="photo-title">拍照或从相册导入</text><text class="muted">尽量拍清题目，保留完整内容</text></view></view><view wx:if="{{localImage}}" class="muted photo-tip">点击照片可重新选择</view><view class="card"><view class="row field"><text class="label">年级</text><input placeholder="如：三年级" value="{{form.grade}}" data-key="grade" bindinput="onInput"/></view><view class="row field"><text class="label">学科</text><input value="{{form.subject}}" data-key="subject" bindinput="onInput"/></view></view><view class="card"><text class="label">题目备注 <text class="muted">（选填）</text></text><textarea placeholder="补充题目文字或想记录的内容" value="{{form.questionText}}" data-key="questionText" bindinput="onInput"/></view><view class="card"><text class="label">我的答案（选填）</text><input value="{{form.userAnswer}}" data-key="userAnswer" bindinput="onInput" placeholder="当时是怎么回答的？"/><text class="label answer-label">正确答案（选填）</text><input value="{{form.correctAnswer}}" data-key="correctAnswer" bindinput="onInput" placeholder="记下正确答案"/></view><button class="primary" disabled="{{saving}}" loading="{{saving}}" bindtap="save">保存到错题本</button></view>
+<view class="page">
+  <!-- Large Title -->
+  <view class="nav-area">
+    <text class="large-title">新增错题</text>
+    <text class="large-title-subtitle">让难题有迹可循，让复习更轻松</text>
+  </view>
+
+  <!-- Photo Picker -->
+  <view class="photo-area" bindtap="chooseImage">
+    <image wx:if="{{localImage}}" class="photo-area__image" src="{{localImage}}" mode="aspectFit"/>
+    <view wx:else class="photo-area__placeholder">
+      <view class="photo-area__icon-wrapper">
+        <text class="photo-area__icon">📷</text>
+      </view>
+      <text class="photo-area__title">拍照或从相册导入</text>
+      <text class="photo-area__hint">尽量拍清题目，保留完整内容</text>
+    </view>
+  </view>
+  <text wx:if="{{localImage}}" class="photo-area__tip" bindtap="chooseImage">点击照片可重新选择</text>
+
+  <!-- Grade & Subject -->
+  <view class="section-header">
+    <text class="section-header__title">基本信息</text>
+  </view>
+
+  <view class="group-card">
+    <view class="group-row">
+      <text class="group-row__label">年级</text>
+      <input class="group-row__input" placeholder="如：三年级" value="{{form.grade}}" data-key="grade" bindinput="onInput"/>
+    </view>
+    <view class="separator"></view>
+    <view class="group-row">
+      <text class="group-row__label">学科</text>
+      <input class="group-row__input" value="{{form.subject}}" data-key="subject" bindinput="onInput" placeholder="如：数学"/>
+    </view>
+  </view>
+
+  <!-- Question Notes -->
+  <view class="section-header">
+    <text class="section-header__title">题目备注</text>
+    <text class="section-header__action">选填</text>
+  </view>
+
+  <view class="group-card">
+    <view class="group-row group-row--textarea">
+      <textarea class="group-row__textarea" placeholder="补充题目文字或想记录的内容" value="{{form.questionText}}" data-key="questionText" bindinput="onInput"/>
+    </view>
+  </view>
+
+  <!-- Answers -->
+  <view class="section-header">
+    <text class="section-header__title">答案</text>
+    <text class="section-header__action">选填</text>
+  </view>
+
+  <view class="group-card">
+    <view class="group-row">
+      <text class="group-row__label">我的答案</text>
+      <input class="group-row__input" value="{{form.userAnswer}}" data-key="userAnswer" bindinput="onInput" placeholder="当时怎么回答的"/>
+    </view>
+    <view class="separator"></view>
+    <view class="group-row">
+      <text class="group-row__label">正确答案</text>
+      <input class="group-row__input" value="{{form.correctAnswer}}" data-key="correctAnswer" bindinput="onInput" placeholder="记下正确答案"/>
+    </view>
+  </view>
+
+  <!-- Save Button -->
+  <button class="btn-primary" disabled="{{saving}}" loading="{{saving}}" bindtap="save">保存到错题本</button>
+</view>
