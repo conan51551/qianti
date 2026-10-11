@@ -1,12 +1,1 @@
-<view class="page">
-  <view class="header"><text class="title">我的错题</text><button size="mini" bindtap="toAdd">+ 录入错题</button></view>
-  <view wx:if="{{loading}}" class="empty">加载中...</view>
-  <view wx:elif="{{!mistakes.length}}" class="empty">还没有错题，先录入一道吧</view>
-  <view wx:else>
-    <view wx:for="{{mistakes}}" wx:key="_id" class="item" bindtap="openDetail" data-id="{{item._id}}">
-      <view class="meta"><text>{{item.subject}}</text><text>{{item.grade}}</text></view>
-      <text class="question">{{item.questionText}}</text>
-      <text class="date">{{item.createdAtText}}</text>
-    </view>
-  </view>
-</view>
+<view class="page"><text class="eyebrow">一点一点，学得更好</text><text class="title">我的错题本</text><text class="subtitle">把每一次出错，变成下一次进步。</text><view class="summary"><view><text class="count">{{mistakes.length}}</text><text class="summary-label">道已收录错题</text></view><van-button type="primary" size="small" icon="plus" bindtap="toAdd">新增错题</van-button></view><view class="row section"><text>最近收录</text><text class="outline-entry" bindtap="openKnowledge">知识大纲 →</text></view><scroll-view scroll-x class="subject-tabs"><text wx:for="{{subjects}}" wx:key="*this" class="subject-tab {{activeSubject===item?'active':''}}" data-subject="{{item}}" bindtap="filterSubject">{{item}}</text></scroll-view><view wx:if="{{loading}}" class="card empty">正在翻开错题本…</view><view wx:elif="{{error}}" class="card empty"><text>暂时无法读取错题</text><text class="subtitle">请检查云服务配置后重试</text><button bindtap="loadMistakes">重新加载</button></view><view wx:elif="{{!mistakes.length}}" class="card empty"><text class="empty-icon">✎</text><text>你的进步，从第一道错题开始</text><text class="subtitle">点击「新增」，拍下需要复习的题目</text></view><view wx:for="{{visibleMistakes}}" wx:key="_id" class="card" bindtap="openDetail" data-id="{{item._id}}"><view class="row"><text class="pill">{{item.subject}} · {{item.grade}}</text><view class="card-actions"><text class="muted">{{item.createdAtText}}</text><van-button class="delete-btn" type="danger" plain size="mini" icon="delete-o" catchtap="deleteMistake" data-id="{{item._id}}">删除</van-button></view></view><image wx:if="{{item.imageFileId}}" class="thumb" src="{{item.imageFileId}}" mode="aspectFill"/><text class="question">{{item.questionText || '照片错题'}}</text><view wx:if="{{item.analysisStatus==='pending'}}" class="muted">AI 正在分析…</view><view wx:if="{{item.errorType}}" class="ai-box"><text class="ai-title">{{item.errorType}}</text><text>{{item.explanation}}</text><text class="muted">知识点：{{item.knowledgePoints}}</text></view><van-button class="gen-btn" type="success" plain size="small" icon="bulb-o" catchtap="generateQuestion" data-id="{{item._id}}">AI出相似题</van-button><text class="muted">点击查看题目与答案 →</text></view></view>

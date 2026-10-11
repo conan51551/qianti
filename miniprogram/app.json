@@ -1,7 +1,42 @@
 {
-  "pages": ["pages/index/index", "pages/mistake-form/mistake-form"],
-  "window": { "navigationBarTitleText": "小错题家", "navigationBarBackgroundColor": "#ffffff", "navigationBarTextStyle": "black" },
+  "pages": [
+    "pages/index/index",
+    "pages/mistake-form/mistake-form",
+    "pages/profile/profile",
+    "pages/knowledge/knowledge"
+  ],
+  "window": {
+    "navigationBarTitleText": "小错题家",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black"
+  },
   "cloud": true,
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#929b96",
+    "selectedColor": "#23805e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/home.png",
+        "selectedIconPath": "assets/home-active.png"
+      },
+      {
+        "pagePath": "pages/mistake-form/mistake-form",
+        "text": "新增",
+        "iconPath": "assets/add.png",
+        "selectedIconPath": "assets/add-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/profile.png",
+        "selectedIconPath": "assets/profile-active.png"
+      }
+    ]
+  }
 }
