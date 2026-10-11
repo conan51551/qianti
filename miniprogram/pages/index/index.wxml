@@ -77,12 +77,9 @@
     </view>
 
     <!-- Thumbnail -->
-    <image 
-      wx:if="{{item.imageFileId}}" 
-      class="mistake-card__thumb" 
-      src="{{item.imageFileId}}" 
-      mode="aspectFill"
-    />
+    <view wx:if="{{item.imageFileId}}" class="mistake-card__thumb-wrap">
+      <image class="mistake-card__thumb" src="{{item.imageFileId}}" mode="aspectFill"/>
+    </view>
 
     <!-- Question Text -->
     <text class="mistake-card__question">{{item.questionText || '照片错题'}}</text>

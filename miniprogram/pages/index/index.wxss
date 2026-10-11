@@ -12,11 +12,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--color-card);
-  border-radius: var(--radius-lg);
+  background: #FFFFFF;
+  border-radius: 28rpx;
   padding: 40rpx 36rpx;
   margin-top: 28rpx;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 
 .summary-card__left {
@@ -27,14 +27,14 @@
 .summary-card__count {
   font-size: 80rpx;
   font-weight: 800;
-  color: var(--color-label);
+  color: #1C1C1E;
   line-height: 1;
   letter-spacing: -2rpx;
 }
 
 .summary-card__label {
   font-size: 26rpx;
-  color: var(--color-label-secondary);
+  color: #8E8E93;
   margin-top: 8rpx;
 }
 
@@ -42,14 +42,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8rpx;
 }
 
 .summary-card__btn {
   width: 88rpx;
   height: 88rpx;
   border-radius: 50%;
-  background: var(--color-primary);
+  background: #007AFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,42 +65,40 @@
 
 .summary-card__btn-text {
   font-size: 24rpx;
-  color: var(--color-label-secondary);
+  color: #8E8E93;
+  margin-top: 8rpx;
 }
 
 /* Segmented Control */
 .segmented {
   white-space: nowrap;
   margin: 28rpx 0 8rpx;
-  display: flex;
-  gap: 12rpx;
 }
 
 .segmented__item {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   padding: 16rpx 36rpx;
+  margin-right: 12rpx;
   border-radius: 100rpx;
-  background: var(--color-fill-secondary);
+  background: rgba(120, 128, 128, 0.12);
   font-size: 28rpx;
   font-weight: 500;
-  color: var(--color-label-secondary);
+  color: #8E8E93;
   transition: all 0.2s ease;
 }
 
 .segmented__item--active {
-  background: var(--color-primary);
+  background: #007AFF;
   color: #FFFFFF;
 }
 
 /* Mistake Card */
 .mistake-card {
-  background: var(--color-card);
-  border-radius: var(--radius-lg);
+  background: #FFFFFF;
+  border-radius: 28rpx;
   overflow: hidden;
   margin-top: 20rpx;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 
 .mistake-card__header {
@@ -113,28 +110,29 @@
 
 .mistake-card__tags {
   display: flex;
-  gap: 12rpx;
+  align-items: center;
 }
 
 .mistake-card__time {
   font-size: 24rpx;
-  color: var(--color-label-tertiary);
+  color: #C7C7CC;
+}
+
+.mistake-card__thumb-wrap {
+  padding: 24rpx 36rpx 0;
 }
 
 .mistake-card__thumb {
   width: 100%;
   height: 320rpx;
-  border-radius: var(--radius-md);
-  margin: 24rpx 36rpx 0;
-  width: calc(100% - 72rpx);
-  object-fit: cover;
+  border-radius: 20rpx;
 }
 
 .mistake-card__question {
   display: block;
   font-size: 32rpx;
   line-height: 1.6;
-  color: var(--color-label);
+  color: #1C1C1E;
   padding: 24rpx 36rpx 0;
 }
 
@@ -142,17 +140,30 @@
 .mistake-card__status {
   display: flex;
   align-items: center;
-  gap: 12rpx;
   padding: 20rpx 36rpx 0;
+}
+
+.mistake-card__status .loading-spinner {
+  width: 28rpx;
+  height: 28rpx;
+  border-width: 3rpx;
+  border-color: #E5E5EA;
+  border-top-color: #007AFF;
+  margin: 0 12rpx 0 0;
+}
+
+.mistake-card__status text {
+  font-size: 26rpx;
+  color: #8E8E93;
 }
 
 /* AI Analysis Box */
 .mistake-card__analysis {
   background: rgba(0, 122, 255, 0.04);
-  border-radius: var(--radius-md);
+  border-radius: 20rpx;
   padding: 24rpx 28rpx;
   margin: 24rpx 36rpx 0;
-  border-left: 6rpx solid var(--color-primary);
+  border-left: 6rpx solid #007AFF;
 }
 
 .mistake-card__analysis-header {
@@ -162,27 +173,26 @@
 .mistake-card__analysis-type {
   font-size: 30rpx;
   font-weight: 600;
-  color: var(--color-primary);
+  color: #007AFF;
 }
 
 .mistake-card__analysis-text {
   display: block;
   font-size: 28rpx;
   line-height: 1.6;
-  color: var(--color-label);
+  color: #1C1C1E;
 }
 
 .mistake-card__knowledge {
   display: flex;
   flex-wrap: wrap;
-  gap: 12rpx;
   margin-top: 16rpx;
 }
 
 /* Card Actions */
 .mistake-card__actions {
   display: flex;
-  border-top: 1rpx solid var(--color-separator);
+  border-top: 1rpx solid #E5E5EA;
   margin-top: 24rpx;
 }
 
@@ -191,7 +201,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8rpx;
   padding: 28rpx 0;
   position: relative;
 }
@@ -203,7 +212,7 @@
   top: 20%;
   bottom: 20%;
   width: 1rpx;
-  background: var(--color-separator);
+  background: #E5E5EA;
 }
 
 .mistake-card__action:last-child::after {
@@ -212,18 +221,15 @@
 
 .mistake-card__action-icon {
   font-size: 28rpx;
+  margin-right: 8rpx;
 }
 
 .mistake-card__action-text {
   font-size: 28rpx;
   font-weight: 500;
-  color: var(--color-primary);
+  color: #007AFF;
 }
 
 .mistake-card__action--danger .mistake-card__action-text {
-  color: var(--color-red);
-}
-
-.mistake-card__action--danger {
-  /* No extra styling needed, handled by text color */
+  color: #FF3B30;
 }

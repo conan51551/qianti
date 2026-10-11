@@ -10,14 +10,14 @@
 .photo-area {
   width: 100%;
   height: 420rpx;
-  background: var(--color-card);
-  border-radius: var(--radius-lg);
+  background: #FFFFFF;
+  border-radius: 28rpx;
   margin-top: 28rpx;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 
 .photo-area__image {
@@ -29,7 +29,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12rpx;
 }
 
 .photo-area__icon-wrapper {
@@ -45,25 +44,27 @@
 
 .photo-area__icon {
   font-size: 52rpx;
-  color: var(--color-primary);
+  color: #007AFF;
 }
 
 .photo-area__title {
   font-size: 32rpx;
   font-weight: 600;
-  color: var(--color-label);
+  color: #1C1C1E;
+  margin-top: 12rpx;
 }
 
 .photo-area__hint {
   font-size: 26rpx;
-  color: var(--color-label-secondary);
+  color: #8E8E93;
+  margin-top: 8rpx;
 }
 
 .photo-area__tip {
   display: block;
   text-align: center;
   font-size: 26rpx;
-  color: var(--color-label-tertiary);
+  color: #C7C7CC;
   margin-top: 20rpx;
 }
 
@@ -84,6 +85,6 @@
   min-height: 160rpx;
   font-size: 30rpx;
   line-height: 1.6;
-  color: var(--color-label);
+  color: #1C1C1E;
   text-align: left;
 }

@@ -22,13 +22,13 @@
 .knowledge-group__title {
   font-size: 38rpx;
   font-weight: 700;
-  color: var(--color-label);
+  color: #1C1C1E;
   letter-spacing: -0.5rpx;
 }
 
 .knowledge-group__count {
   font-size: 26rpx;
-  color: var(--color-label-secondary);
+  color: #8E8E93;
 }
 
 /* Knowledge Point (inside group card) */
@@ -44,7 +44,7 @@
   right: 0;
   bottom: 0;
   height: 1rpx;
-  background: var(--color-separator);
+  background: #E5E5EA;
 }
 
 .knowledge-point:last-child::after {
@@ -60,13 +60,13 @@
 .knowledge-point__name {
   font-size: 34rpx;
   font-weight: 600;
-  color: var(--color-primary);
+  color: #007AFF;
   flex: 1;
 }
 
 .knowledge-point__badge {
   background: rgba(0, 122, 255, 0.1);
-  color: var(--color-primary);
+  color: #007AFF;
   font-size: 24rpx;
   font-weight: 600;
   padding: 6rpx 20rpx;
@@ -83,20 +83,20 @@
 .knowledge-point__row {
   display: flex;
   align-items: baseline;
-  gap: 12rpx;
   margin-bottom: 12rpx;
 }
 
 .knowledge-point__label {
   font-size: 26rpx;
-  color: var(--color-label-secondary);
+  color: #8E8E93;
   flex-shrink: 0;
   font-weight: 500;
+  margin-right: 12rpx;
 }
 
 .knowledge-point__value {
   font-size: 28rpx;
-  color: var(--color-green);
+  color: #34C759;
   font-weight: 500;
 }
 
@@ -104,19 +104,19 @@
   display: block;
   font-size: 28rpx;
   line-height: 1.6;
-  color: var(--color-label);
+  color: #1C1C1E;
   margin: 12rpx 0;
 }
 
 .knowledge-point__prereq {
   display: flex;
   align-items: baseline;
-  gap: 12rpx;
   margin-top: 8rpx;
 }
 
 .knowledge-point__prereq-list {
   font-size: 26rpx;
-  color: var(--color-label-secondary);
+  color: #8E8E93;
   flex: 1;
+  margin-left: 12rpx;
 }
