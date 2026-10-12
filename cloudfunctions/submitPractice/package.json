@@ -1,0 +1,9 @@
+{
+  "name": "submitPractice",
+  "version": "1.0.0",
+  "description": "Record practice attempt and update mistake mastery",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

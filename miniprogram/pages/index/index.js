@@ -7,7 +7,11 @@ Page({
     subjects: ['全部'],
     activeSubject: '全部',
     loading: true,
-    error: false
+    error: false,
+    masteredCount: 0,
+    familiarCount: 0,
+    practicingCount: 0,
+    untrackedCount: 0
   },
 
   onShow() {
@@ -20,14 +24,30 @@ Page({
       const r = await call('listMistakes');
       const ms = (r.data || []).map(x => ({
         ...x,
+        masteryLevel: typeof x.mastery === 'number' ? x.mastery : 0,
         createdAtText: this.formatDate(x.createdAt)
       }));
       const subjects = ['全部', ...new Set(ms.map(x => x.subject).filter(Boolean))];
+
+      // Compute mastery counts
+      let mastered = 0, familiar = 0, practicing = 0, untracked = 0;
+      ms.forEach(m => {
+        const level = m.masteryLevel;
+        if (level >= 3) mastered++;
+        else if (level === 2) familiar++;
+        else if (level === 1) practicing++;
+        else untracked++;
+      });
+
       this.setData({
         mistakes: ms,
         visibleMistakes: ms,
         subjects,
         activeSubject: '全部',
+        masteredCount: mastered,
+        familiarCount: familiar,
+        practicingCount: practicing,
+        untrackedCount: untracked,
         loading: false
       });
     } catch (e) {
@@ -42,8 +62,8 @@ Page({
     const diff = (now - d) / (1000 * 60 * 60 * 24);
     if (diff < 1) return '今天';
     if (diff < 2) return '昨天';
-    if (diff < 7) return `${Math.floor(diff)}天前`;
-    return `${d.getMonth() + 1}月${d.getDate()}日`;
+    if (diff < 7) return Math.floor(diff) + '天前';
+    return (d.getMonth() + 1) + '月' + d.getDate() + '日';
   },
 
   filterSubject(e) {
@@ -62,8 +82,28 @@ Page({
     });
   },
 
+  openStats() {
+    wx.navigateTo({
+      url: '/pages/stats/stats'
+    });
+  },
+
   toAdd() {
     wx.switchTab({ url: '/pages/mistake-form/mistake-form' });
+  },
+
+  openDetail(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/mistake-detail/mistake-detail?id=' + id
+    });
+  },
+
+  goPractice(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/practice/practice?mistakeId=' + id
+    });
   },
 
   deleteMistake(e) {
@@ -90,37 +130,6 @@ Page({
           wx.hideLoading();
         }
       }
-    });
-  },
-
-  generateQuestion(e) {
-    const item = this.data.mistakes.find(x => x._id === e.currentTarget.dataset.id);
-    if (!item) return;
-    wx.showLoading({ title: '出题中' });
-    call('generateQuestion', item)
-      .then(r => wx.showModal({
-        title: 'AI 变式题',
-        content: [r.questionText, '答案：' + r.answer, '解析：' + r.explanation].join('\n\n'),
-        showCancel: false,
-        confirmText: '知道了'
-      }))
-      .catch(_ => wx.showToast({ title: '出题失败', icon: 'none' }))
-      .finally(() => wx.hideLoading());
-  },
-
-  openDetail(e) {
-    const item = this.data.mistakes.find(m => m._id === e.currentTarget.dataset.id);
-    if (!item) return;
-    wx.showModal({
-      title: item.subject + '错题',
-      content: [
-        item.questionText || '照片错题',
-        '我的答案：' + (item.userAnswer || '未填写'),
-        '正确答案：' + (item.correctAnswer || '未填写')
-      ].join('\n\n'),
-      showCancel: !!item.imageFileId,
-      cancelText: '查看照片',
-      confirmText: '关闭'
     });
   }
 });

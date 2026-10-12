@@ -1,0 +1,128 @@
+<view class="page">
+  <!-- Large Title -->
+  <view class="nav-area">
+    <text class="large-title">掌握度</text>
+    <text class="large-title-subtitle">追踪每道错题的掌握进度</text>
+  </view>
+
+  <!-- Loading -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text>正在统计</text>
+  </view>
+
+  <!-- Error -->
+  <view wx:elif="{{error}}" class="empty-state">
+    <text class="empty-state__icon">⚠︎</text>
+    <text class="empty-state__title">暂时无法读取数据</text>
+    <button class="btn-primary" style="width: 400rpx; margin-top: 32rpx;" bindtap="load">重新加载</button>
+  </view>
+
+  <!-- Empty -->
+  <view wx:elif="{{total === 0}}" class="empty-state">
+    <text class="empty-state__icon">📊</text>
+    <text class="empty-state__title">还没有错题数据</text>
+    <text class="empty-state__subtitle">录入错题并完成练习后，掌握度会出现在这里</text>
+  </view>
+
+  <block wx:else>
+    <!-- Overall Progress Card -->
+    <view class="stats-overview">
+      <view class="stats-overview__header">
+        <text class="stats-overview__title">总体掌握度</text>
+        <text class="stats-overview__percent">{{overallPercent}}%</text>
+      </view>
+      <!-- Progress Bar -->
+      <view class="progress-bar">
+        <view class="progress-bar__fill" style="width: {{overallPercent}}%;"></view>
+      </view>
+      <view class="stats-overview__legend">
+        <view class="legend-item">
+          <view class="legend-dot legend-dot--green"></view>
+          <text class="legend-text">已掌握 {{mastered}}</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-dot legend-dot--blue"></view>
+          <text class="legend-text">较熟悉 {{familiar}}</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-dot legend-dot--orange"></view>
+          <text class="legend-text">练习中 {{practicing}}</text>
+        </view>
+        <view class="legend-item">
+          <view class="legend-dot legend-dot--gray"></view>
+          <text class="legend-text">未练习 {{untracked}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- By Subject -->
+    <view class="section-header">
+      <text class="section-header__title">按学科</text>
+    </view>
+    <view class="group-card">
+      <view wx:for="{{subjectStats}}" wx:key="subject" class="subject-row">
+        <view class="subject-row__info">
+          <text class="subject-row__name">{{item.subject}}</text>
+          <text class="subject-row__detail">{{item.mastered}}/{{item.total}} 已掌握</text>
+        </view>
+        <view class="subject-progress">
+          <view class="subject-progress__bar">
+            <view class="subject-progress__fill" style="width: {{item.percent}}%; background: {{item.barColor}};"></view>
+          </view>
+          <text class="subject-row__percent">{{item.percent}}%</text>
+        </view>
+        <view wx:if="{{index < subjectStats.length - 1}}" class="separator"></view>
+      </view>
+    </view>
+
+    <!-- Needs Review -->
+    <view class="section-header">
+      <text class="section-header__title">待复习</text>
+      <text class="section-header__action" wx:if="{{needsReview.length > 0}}">{{needsReview.length}} 道</text>
+    </view>
+
+    <view wx:if="{{needsReview.length === 0}}" class="empty-mini">
+      <text class="empty-mini__text">所有错题都在掌握中，继续保持</text>
+    </view>
+
+    <view wx:for="{{needsReview}}" wx:key="_id" class="review-card" bindtap="openDetail" data-id="{{item._id}}">
+      <view class="review-card__header">
+        <text class="pill pill--blue">{{item.subject}}</text>
+        <text class="review-card__mastery">{{item.masteryLabel}}</text>
+      </view>
+      <text class="review-card__text">{{item.questionText || '照片错题'}}</text>
+      <view class="review-card__dots">
+        <view class="mastery-dot {{item.mastery >= 1 ? 'mastery-dot--active' : ''}}"></view>
+        <view class="mastery-dot {{item.mastery >= 2 ? 'mastery-dot--active' : ''}}"></view>
+        <view class="mastery-dot {{item.mastery >= 3 ? 'mastery-dot--active' : ''}}"></view>
+      </view>
+    </view>
+
+    <!-- Practice Stats -->
+    <view class="section-header">
+      <text class="section-header__title">练习记录</text>
+    </view>
+    <view class="group-card">
+      <view class="group-row">
+        <text class="group-row__label">总错题</text>
+        <text class="group-row__value">{{total}}</text>
+      </view>
+      <view class="separator"></view>
+      <view class="group-row">
+        <text class="group-row__label">已练习</text>
+        <text class="group-row__value">{{practiced}}</text>
+      </view>
+      <view class="separator"></view>
+      <view class="group-row">
+        <text class="group-row__label">练习正确</text>
+        <text class="group-row__value text-green">{{correctCount}}</text>
+      </view>
+      <view class="separator"></view>
+      <view class="group-row">
+        <text class="group-row__label">正确率</text>
+        <text class="group-row__value">{{practiced > 0 ? accuracy : '0'}}%</text>
+      </view>
+    </view>
+  </block>
+</view>

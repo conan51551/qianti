@@ -92,6 +92,66 @@
   color: #FFFFFF;
 }
 
+/* Section Header Links */
+.section-header__links {
+  display: flex;
+  align-items: center;
+}
+
+.section-header__action--sep {
+  margin-left: 24rpx;
+  position: relative;
+}
+
+.section-header__action--sep::before {
+  content: '';
+  position: absolute;
+  left: -12rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rpx;
+  height: 24rpx;
+  background: #E5E5EA;
+}
+
+/* Mastery Quick Stats Bar */
+.mastery-quick {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 28rpx 16rpx;
+  margin-top: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.mastery-quick__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mastery-quick__num {
+  font-size: 44rpx;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1rpx;
+}
+
+.mastery-quick__label {
+  font-size: 22rpx;
+  color: #8E8E93;
+  margin-top: 8rpx;
+}
+
+.mastery-quick__divider {
+  width: 1rpx;
+  height: 48rpx;
+  background: #E5E5EA;
+}
+
 /* Mistake Card */
 .mistake-card {
   background: #FFFFFF;
@@ -232,4 +292,23 @@
 
 .mistake-card__action--danger .mistake-card__action-text {
   color: #FF3B30;
+}
+
+/* Mastery Dots on Cards */
+.mistake-card__mastery {
+  display: flex;
+  align-items: center;
+  margin-left: 12rpx;
+}
+
+.mastery-dot-mini {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #E5E5EA;
+  margin-right: 6rpx;
+}
+
+.mastery-dot-mini--active {
+  background: #34C759;
 }

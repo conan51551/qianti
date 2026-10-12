@@ -3,7 +3,10 @@
     "pages/index/index",
     "pages/mistake-form/mistake-form",
     "pages/profile/profile",
-    "pages/knowledge/knowledge"
+    "pages/knowledge/knowledge",
+    "pages/mistake-detail/mistake-detail",
+    "pages/practice/practice",
+    "pages/stats/stats"
   ],
   "window": {
     "navigationBarTitleText": "小错题家",

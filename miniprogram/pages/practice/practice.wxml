@@ -1,0 +1,106 @@
+<view class="page">
+  <!-- Loading Question -->
+  <view wx:if="{{phase === 'loading'}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text>正在生成变式题</text>
+    <text class="loading-hint">AI 正在根据错题出题，请稍候</text>
+  </view>
+
+  <!-- Error: Failed to generate -->
+  <view wx:elif="{{phase === 'error'}}" class="empty-state">
+    <text class="empty-state__icon">⚠︎</text>
+    <text class="empty-state__title">出题失败</text>
+    <text class="empty-state__subtitle">AI 服务暂时不可用，请稍后重试</text>
+    <button class="btn-primary" style="width: 400rpx; margin-top: 32rpx;" bindtap="generate">重新出题</button>
+  </view>
+
+  <!-- Question Phase -->
+  <block wx:elif="{{phase === 'question'}}">
+    <!-- Question Header -->
+    <view class="practice-header">
+      <text class="practice-header__eyebrow">变式题</text>
+      <text class="practice-header__subject">{{mistake.subject}} {{mistake.grade}}</text>
+    </view>
+
+    <!-- Knowledge Points -->
+    <view wx:if="{{practiceQuestion.knowledgePoints.length}}" class="practice-tags">
+      <text class="pill pill--green" wx:for="{{practiceQuestion.knowledgePoints}}" wx:key="*this">{{item}}</text>
+    </view>
+
+    <!-- Question Card -->
+    <view class="practice-card">
+      <text class="practice-card__label">题目</text>
+      <text class="practice-card__text">{{practiceQuestion.questionText}}</text>
+    </view>
+
+    <!-- Answer Input -->
+    <view class="section-header">
+      <text class="section-header__title">你的答案</text>
+    </view>
+    <view class="group-card">
+      <view class="practice-input-area">
+        <textarea
+          class="practice-input"
+          placeholder="在这里输入你的答案"
+          value="{{userAnswer}}"
+          bindinput="onAnswerInput"
+          maxlength="500"
+          auto-height
+        />
+      </view>
+    </view>
+
+    <!-- Submit Button -->
+    <button class="btn-primary" bindtap="submit" disabled="{{!userAnswer}}">
+      提交答案
+    </button>
+  </block>
+
+  <!-- Result Phase -->
+  <block wx:elif="{{phase === 'result'}}">
+    <!-- Result Banner -->
+    <view class="result-banner result-banner--{{isCorrect ? 'correct' : 'wrong'}}">
+      <text class="result-banner__icon">{{isCorrect ? '✓' : '✗'}}</text>
+      <text class="result-banner__text">{{isCorrect ? '回答正确' : '答案不对'}}</text>
+    </view>
+
+    <!-- Your Answer vs Correct Answer -->
+    <view class="section-header">
+      <text class="section-header__title">答案对比</text>
+    </view>
+    <view class="group-card">
+      <view class="group-row">
+        <text class="group-row__label">你的答案</text>
+        <text class="group-row__value {{isCorrect ? 'text-green' : 'text-red'}}">{{userAnswer}}</text>
+      </view>
+      <view class="separator"></view>
+      <view class="group-row">
+        <text class="group-row__label">正确答案</text>
+        <text class="group-row__value text-green">{{practiceQuestion.answer}}</text>
+      </view>
+    </view>
+
+    <!-- Explanation -->
+    <view class="section-header">
+      <text class="section-header__title">解析</text>
+    </view>
+    <view class="practice-card practice-card--explanation">
+      <text class="practice-card__text">{{practiceQuestion.explanation}}</text>
+    </view>
+
+    <!-- Mastery Update -->
+    <view class="mastery-update">
+      <text class="mastery-update__label">掌握度</text>
+      <view class="mastery-update__dots">
+        <view class="mastery-dot {{resultMastery >= 1 ? 'mastery-dot--active' : ''}}"></view>
+        <view class="mastery-dot {{resultMastery >= 2 ? 'mastery-dot--active' : ''}}"></view>
+        <view class="mastery-dot {{resultMastery >= 3 ? 'mastery-dot--active' : ''}}"></view>
+      </view>
+      <text class="mastery-update__text">{{masteryLabels[resultMastery]}}</text>
+    </view>
+
+    <!-- Actions -->
+    <button class="btn-primary" bindtap="generate">再练一道</button>
+    <button class="btn-secondary" bindtap="goBack">返回错题本</button>
+  </block>
+</view>

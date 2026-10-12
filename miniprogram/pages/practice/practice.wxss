@@ -1,0 +1,190 @@
+/* ============================================
+   练习页 — Apple Design Language
+   ============================================ */
+
+.page {
+  padding-bottom: 160rpx;
+}
+
+/* Loading */
+.loading-hint {
+  display: block;
+  font-size: 26rpx;
+  color: #C7C7CC;
+  margin-top: 12rpx;
+}
+
+/* Practice Header */
+.practice-header {
+  padding: 12rpx 8rpx 0;
+}
+
+.practice-header__eyebrow {
+  display: block;
+  font-size: 23rpx;
+  color: #8E8E93;
+  letter-spacing: 1rpx;
+  text-transform: uppercase;
+  margin-bottom: 8rpx;
+}
+
+.practice-header__subject {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1C1C1E;
+  letter-spacing: -0.5rpx;
+}
+
+/* Tags */
+.practice-tags {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 16rpx 8rpx 0;
+}
+
+.practice-tags .pill {
+  margin: 0 12rpx 8rpx 0;
+}
+
+/* Question Card */
+.practice-card {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 32rpx 36rpx;
+  margin-top: 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.practice-card--explanation {
+  border-left: 6rpx solid #007AFF;
+  background: rgba(0, 122, 255, 0.03);
+}
+
+.practice-card__label {
+  display: block;
+  font-size: 26rpx;
+  color: #8E8E93;
+  margin-bottom: 12rpx;
+}
+
+.practice-card__text {
+  display: block;
+  font-size: 32rpx;
+  line-height: 1.7;
+  color: #1C1C1E;
+}
+
+/* Answer Input */
+.practice-input-area {
+  padding: 32rpx 36rpx;
+}
+
+.practice-input {
+  width: 100%;
+  min-height: 120rpx;
+  font-size: 32rpx;
+  line-height: 1.6;
+  color: #1C1C1E;
+  text-align: left;
+}
+
+/* Result Banner */
+.result-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 28rpx;
+  padding: 48rpx 36rpx;
+  margin-top: 28rpx;
+}
+
+.result-banner--correct {
+  background: rgba(52, 199, 89, 0.08);
+}
+
+.result-banner--wrong {
+  background: rgba(255, 59, 48, 0.08);
+}
+
+.result-banner__icon {
+  font-size: 56rpx;
+  font-weight: 800;
+  margin-right: 16rpx;
+}
+
+.result-banner--correct .result-banner__icon {
+  color: #34C759;
+}
+
+.result-banner--wrong .result-banner__icon {
+  color: #FF3B30;
+}
+
+.result-banner__text {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.result-banner--correct .result-banner__text {
+  color: #34C759;
+}
+
+.result-banner--wrong .result-banner__text {
+  color: #FF3B30;
+}
+
+/* Mastery Update */
+.mastery-update {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 28rpx 36rpx;
+  margin-top: 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.mastery-update__label {
+  font-size: 30rpx;
+  color: #8E8E93;
+}
+
+.mastery-update__dots {
+  display: flex;
+  align-items: center;
+}
+
+.mastery-dot {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background: #E5E5EA;
+  margin-right: 16rpx;
+}
+
+.mastery-dot--active {
+  background: #34C759;
+}
+
+.mastery-update__text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: rgba(120, 128, 128, 0.12);
+  color: #007AFF;
+  border-radius: 28rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin-top: 24rpx;
+}
+
+.btn-secondary::after {
+  border: 0;
+}

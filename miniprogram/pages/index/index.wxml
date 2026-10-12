@@ -7,7 +7,7 @@
 
   <!-- Summary Card -->
   <view class="summary-card" wx:if="{{mistakes.length > 0}}">
-    <view class="summary-card__left">
+    <view class="summary-card__left" bindtap="openStats">
       <text class="summary-card__count">{{mistakes.length}}</text>
       <text class="summary-card__label">道已收录错题</text>
     </view>
@@ -16,6 +16,29 @@
         <text class="summary-card__btn-icon">＋</text>
       </view>
       <text class="summary-card__btn-text">新增</text>
+    </view>
+  </view>
+
+  <!-- Mastery Quick Stats -->
+  <view class="mastery-quick" wx:if="{{mistakes.length > 0}}" bindtap="openStats">
+    <view class="mastery-quick__item">
+      <text class="mastery-quick__num text-green">{{masteredCount}}</text>
+      <text class="mastery-quick__label">已掌握</text>
+    </view>
+    <view class="mastery-quick__divider"></view>
+    <view class="mastery-quick__item">
+      <text class="mastery-quick__num text-primary">{{familiarCount}}</text>
+      <text class="mastery-quick__label">较熟悉</text>
+    </view>
+    <view class="mastery-quick__divider"></view>
+    <view class="mastery-quick__item">
+      <text class="mastery-quick__num text-orange">{{practicingCount}}</text>
+      <text class="mastery-quick__label">练习中</text>
+    </view>
+    <view class="mastery-quick__divider"></view>
+    <view class="mastery-quick__item">
+      <text class="mastery-quick__num text-tertiary">{{untrackedCount}}</text>
+      <text class="mastery-quick__label">未练习</text>
     </view>
   </view>
 
@@ -35,7 +58,10 @@
   <!-- Section Header -->
   <view class="section-header">
     <text class="section-header__title">最近收录</text>
-    <text class="section-header__action" bindtap="openKnowledge">知识大纲</text>
+    <view class="section-header__links">
+      <text class="section-header__action" bindtap="openStats">掌握度</text>
+      <text class="section-header__action section-header__action--sep" bindtap="openKnowledge">知识大纲</text>
+    </view>
   </view>
 
   <!-- Loading State -->
@@ -72,6 +98,11 @@
       <view class="mistake-card__tags">
         <text class="pill pill--blue">{{item.subject}}</text>
         <text class="pill">{{item.grade}}</text>
+        <view class="mistake-card__mastery">
+          <view class="mastery-dot-mini {{item.masteryLevel >= 1 ? 'mastery-dot-mini--active' : ''}}"></view>
+          <view class="mastery-dot-mini {{item.masteryLevel >= 2 ? 'mastery-dot-mini--active' : ''}}"></view>
+          <view class="mastery-dot-mini {{item.masteryLevel >= 3 ? 'mastery-dot-mini--active' : ''}}"></view>
+        </view>
       </view>
       <text class="mistake-card__time">{{item.createdAtText}}</text>
     </view>
@@ -103,7 +134,7 @@
 
     <!-- Card Actions -->
     <view class="mistake-card__actions">
-      <view class="mistake-card__action" catchtap="generateQuestion" data-id="{{item._id}}">
+      <view class="mistake-card__action" catchtap="goPractice" data-id="{{item._id}}">
         <text class="mistake-card__action-icon">💡</text>
         <text class="mistake-card__action-text">出变式题</text>
       </view>

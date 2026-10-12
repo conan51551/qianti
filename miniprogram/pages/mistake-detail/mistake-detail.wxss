@@ -1,0 +1,179 @@
+/* ============================================
+   错题详情页 — Apple Design Language
+   ============================================ */
+
+.page {
+  padding-bottom: 160rpx;
+}
+
+/* Header */
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 8rpx 0;
+}
+
+.detail-tags {
+  display: flex;
+  align-items: center;
+}
+
+.detail-tags .pill {
+  margin-right: 12rpx;
+}
+
+.detail-time {
+  font-size: 24rpx;
+  color: #C7C7CC;
+}
+
+/* Image */
+.detail-image-wrap {
+  margin-top: 28rpx;
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  padding: 24rpx;
+  text-align: center;
+}
+
+.detail-image {
+  width: 100%;
+  border-radius: 20rpx;
+}
+
+.detail-image-hint {
+  display: block;
+  font-size: 24rpx;
+  color: #C7C7CC;
+  margin-top: 16rpx;
+}
+
+/* Question Text Area */
+.detail-text-area {
+  padding: 32rpx 36rpx;
+}
+
+.detail-text {
+  font-size: 32rpx;
+  line-height: 1.7;
+  color: #1C1C1E;
+}
+
+/* AI Analysis */
+.detail-analysis-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 40rpx;
+  color: #8E8E93;
+  font-size: 28rpx;
+}
+
+.detail-analysis-loading .loading-spinner {
+  margin: 0 16rpx 0 0;
+}
+
+.detail-analysis {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 32rpx 36rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  border-left: 6rpx solid #007AFF;
+}
+
+.detail-analysis__type {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.detail-analysis__type-label {
+  font-size: 26rpx;
+  color: #8E8E93;
+  margin-right: 16rpx;
+}
+
+.detail-analysis__type-value {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #007AFF;
+}
+
+.detail-analysis__section {
+  margin-top: 20rpx;
+}
+
+.detail-analysis__section-title {
+  display: block;
+  font-size: 26rpx;
+  color: #8E8E93;
+  margin-bottom: 8rpx;
+}
+
+.detail-analysis__section-text {
+  display: block;
+  font-size: 30rpx;
+  line-height: 1.7;
+  color: #1C1C1E;
+}
+
+/* Knowledge Points */
+.detail-knowledge {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 8rpx;
+}
+
+.detail-knowledge .pill {
+  margin: 0 12rpx 12rpx 0;
+}
+
+/* Mastery */
+.mastery-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 36rpx;
+}
+
+.mastery-dots {
+  display: flex;
+  align-items: center;
+}
+
+.mastery-dot {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background: #E5E5EA;
+  margin-right: 16rpx;
+}
+
+.mastery-dot--active {
+  background: #34C759;
+}
+
+.mastery-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+}
+
+/* Danger Button */
+.btn-danger {
+  background: rgba(255, 59, 48, 0.08);
+  color: #FF3B30;
+  border-radius: 28rpx;
+  font-size: 34rpx;
+  font-weight: 600;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin-top: 24rpx;
+}
+
+.btn-danger::after {
+  border: 0;
+}

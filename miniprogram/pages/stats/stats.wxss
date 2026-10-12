@@ -1,0 +1,190 @@
+/* ============================================
+   掌握度页 — Apple Design Language
+   ============================================ */
+
+.nav-area {
+  padding: 20rpx 8rpx 0;
+}
+
+/* Overall Progress */
+.stats-overview {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 32rpx 36rpx;
+  margin-top: 28rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.stats-overview__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20rpx;
+}
+
+.stats-overview__title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1C1C1E;
+}
+
+.stats-overview__percent {
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #007AFF;
+  letter-spacing: -1rpx;
+}
+
+.progress-bar {
+  height: 16rpx;
+  background: #E5E5EA;
+  border-radius: 100rpx;
+  overflow: hidden;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, #34C759, #30D158);
+  border-radius: 100rpx;
+  transition: width 0.5s ease;
+}
+
+.stats-overview__legend {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 24rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 24rpx;
+  margin-bottom: 8rpx;
+}
+
+.legend-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+
+.legend-dot--green { background: #34C759; }
+.legend-dot--blue { background: #007AFF; }
+.legend-dot--orange { background: #FF9500; }
+.legend-dot--gray { background: #E5E5EA; }
+
+.legend-text {
+  font-size: 24rpx;
+  color: #8E8E93;
+}
+
+/* Subject Row */
+.subject-row {
+  padding: 28rpx 36rpx;
+  position: relative;
+}
+
+.subject-row__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12rpx;
+}
+
+.subject-row__name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+}
+
+.subject-row__detail {
+  font-size: 26rpx;
+  color: #8E8E93;
+}
+
+.subject-progress {
+  display: flex;
+  align-items: center;
+}
+
+.subject-progress__bar {
+  flex: 1;
+  height: 12rpx;
+  background: #E5E5EA;
+  border-radius: 100rpx;
+  overflow: hidden;
+  margin-right: 16rpx;
+}
+
+.subject-progress__fill {
+  height: 100%;
+  border-radius: 100rpx;
+  transition: width 0.5s ease;
+}
+
+.subject-row__percent {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+  width: 80rpx;
+  text-align: right;
+}
+
+/* Empty Mini */
+.empty-mini {
+  text-align: center;
+  padding: 32rpx 40rpx;
+}
+
+.empty-mini__text {
+  font-size: 28rpx;
+  color: #8E8E93;
+}
+
+/* Review Card */
+.review-card {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 28rpx 36rpx;
+  margin-top: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.review-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.review-card__mastery {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #8E8E93;
+}
+
+.review-card__text {
+  display: block;
+  font-size: 30rpx;
+  line-height: 1.6;
+  color: #1C1C1E;
+  margin-bottom: 16rpx;
+}
+
+.review-card__dots {
+  display: flex;
+  align-items: center;
+}
+
+.mastery-dot {
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 50%;
+  background: #E5E5EA;
+  margin-right: 16rpx;
+}
+
+.mastery-dot--active {
+  background: #34C759;
+}
