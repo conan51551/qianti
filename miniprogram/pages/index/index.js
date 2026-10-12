@@ -14,45 +14,105 @@ Page({
     untrackedCount: 0
   },
 
+  _pollTimer: null,
+
   onShow() {
     this.loadMistakes();
+  },
+
+  onHide() {
+    this._stopPolling();
+  },
+
+  onUnload() {
+    this._stopPolling();
   },
 
   async loadMistakes() {
     this.setData({ loading: true, error: false });
     try {
       const r = await call('listMistakes');
-      const ms = (r.data || []).map(x => ({
-        ...x,
-        masteryLevel: typeof x.mastery === 'number' ? x.mastery : 0,
-        createdAtText: this.formatDate(x.createdAt)
-      }));
-      const subjects = ['全部', ...new Set(ms.map(x => x.subject).filter(Boolean))];
-
-      // Compute mastery counts
-      let mastered = 0, familiar = 0, practicing = 0, untracked = 0;
-      ms.forEach(m => {
-        const level = m.masteryLevel;
-        if (level >= 3) mastered++;
-        else if (level === 2) familiar++;
-        else if (level === 1) practicing++;
-        else untracked++;
-      });
-
-      this.setData({
-        mistakes: ms,
-        visibleMistakes: ms,
-        subjects,
-        activeSubject: '全部',
-        masteredCount: mastered,
-        familiarCount: familiar,
-        practicingCount: practicing,
-        untrackedCount: untracked,
-        loading: false
-      });
+      this._applyMistakes(r.data || []);
+      this._checkPending();
     } catch (e) {
       this.setData({ loading: false, error: true });
       wx.showToast({ title: '加载失败', icon: 'none' });
+    }
+  },
+
+  _applyMistakes(rawList) {
+    const ms = (rawList || []).map(x => ({
+      ...x,
+      masteryLevel: typeof x.mastery === 'number' ? x.mastery : 0,
+      createdAtText: this.formatDate(x.createdAt)
+    }));
+    const subjects = ['全部', ...new Set(ms.map(x => x.subject).filter(Boolean))];
+
+    let mastered = 0, familiar = 0, practicing = 0, untracked = 0;
+    ms.forEach(m => {
+      const level = m.masteryLevel;
+      if (level >= 3) mastered++;
+      else if (level === 2) familiar++;
+      else if (level === 1) practicing++;
+      else untracked++;
+    });
+
+    const activeSubject = this.data.activeSubject || '全部';
+    this.setData({
+      mistakes: ms,
+      visibleMistakes: activeSubject === '全部'
+        ? ms
+        : ms.filter(x => x.subject === activeSubject),
+      subjects,
+      masteredCount: mastered,
+      familiarCount: familiar,
+      practicingCount: practicing,
+      untrackedCount: untracked,
+      loading: false
+    });
+  },
+
+  _checkPending() {
+    const hasPending = this.data.mistakes.some(m => m.analysisStatus === 'pending');
+    if (hasPending) {
+      this._startPolling();
+    } else {
+      this._stopPolling();
+    }
+  },
+
+  _startPolling() {
+    this._stopPolling();
+    this._pollTimer = setInterval(async () => {
+      try {
+        const r = await call('listMistakes');
+        const newList = r.data || [];
+        const oldMap = {};
+        this.data.mistakes.forEach(m => { oldMap[m._id] = m; });
+
+        // Check if any pending items changed status
+        let changed = false;
+        newList.forEach(m => {
+          const old = oldMap[m._id];
+          if (old && old.analysisStatus === 'pending' && m.analysisStatus !== 'pending') {
+            changed = true;
+          }
+        });
+
+        if (changed) {
+          this._applyMistakes(newList);
+          this._checkPending();
+        }
+      } catch (_) {
+        // ignore poll errors
+      }
+    }, 4000);
+  },
+
+  _stopPolling() {
+    if (this._pollTimer) {
+      clearInterval(this._pollTimer);
+      this._pollTimer = null;
     }
   },
 
