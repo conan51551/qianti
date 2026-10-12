@@ -18,17 +18,6 @@
     微信登录
   </button>
 
-  <!-- Membership Entry -->
-  <view wx:if="{{loggedIn}}" class="membership-card" bindtap="openMembership">
-    <view class="membership-card__left">
-      <text class="membership-card__title">小错题家 Pro</text>
-      <text class="membership-card__desc">解锁无限 AI 分析与变式题练习</text>
-    </view>
-    <view class="membership-card__action">
-      <text class="membership-card__btn">了解 ›</text>
-    </view>
-  </view>
-
   <!-- Profile Info Card -->
   <view wx:if="{{loggedIn}}">
     <view class="section-header">

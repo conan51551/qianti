@@ -71,14 +71,10 @@ Page({
     }
   },
 
-  openMembership() {
-    wx.navigateTo({ url: '/pages/membership/membership' });
-  },
-
   showPrivacy() {
     wx.showModal({
       title: '隐私说明',
-      content: '小错题家高度重视你的隐私：\n\n1. 仅收集与错题相关的数据（题目图片、文字、答案），不收集其他任何信息。\n2. 所有数据存储在微信云服务，按微信用户身份隔离，仅你本人可访问。\n3. 图片仅用于 AI 分析错题，分析完成后图片在云存储中保留以便你查看，可随时删除。\n4. AI 分析使用第三方接口，不会泄露你的个人身份信息。\n5. 你可以随时导出或清空所有数据。',
+      content: '小错题家高度重视你的隐私：仅收集与错题相关的数据（题目图片、文字、答案），不收集其他任何信息。所有数据存储在微信云服务，按微信用户身份隔离，仅你本人可访问。图片仅用于 AI 分析错题，可随时删除。你可以随时导出或清空所有数据。',
       showCancel: false,
       confirmText: '知道了',
       confirmColor: '#007AFF'
@@ -89,20 +85,43 @@ Page({
     wx.showLoading({ title: '导出中' });
     try {
       const r = await call('exportMistakes');
+      if (!r.data || r.data.length === 0) {
+        wx.hideLoading();
+        wx.showToast({ title: '暂无错题可导出', icon: 'none' });
+        return;
+      }
       const json = JSON.stringify(r.data, null, 2);
       const fs = wx.getFileSystemManager();
-      const path = `${wx.env.USER_DATA_PATH}/mistakes_export_${Date.now()}.json`;
+      // 用 .txt 扩展名，兼容 wx.openDocument
+      const path = `${wx.env.USER_DATA_PATH}/mistakes_export_${Date.now()}.txt`;
       fs.writeFileSync(path, json, 'utf8');
       wx.hideLoading();
-      wx.shareFileMessage({
+
+      wx.openDocument({
         filePath: path,
+        fileType: 'txt',
+        showMenu: true,
         success: () => {},
         fail: () => {
-          wx.showModal({
-            title: '导出成功',
-            content: `已导出 ${r.count} 条错题记录。文件已保存到应用目录。`,
-            showCancel: false,
-            confirmText: '知道了'
+          // 降级：尝试 shareFileMessage
+          wx.shareFileMessage({
+            filePath: path,
+            fileName: `mistakes_export.txt`,
+            fail: () => {
+              // 最终降级：复制到剪贴板
+              wx.setClipboardData({
+                data: json,
+                success: () => {
+                  wx.showModal({
+                    title: '已复制到剪贴板',
+                    content: `已导出 ${r.count} 条错题记录，数据已复制到剪贴板，可粘贴到其他应用保存。`,
+                    showCancel: false,
+                    confirmText: '知道了',
+                    confirmColor: '#007AFF'
+                  });
+                }
+              });
+            }
           });
         }
       });
@@ -115,7 +134,7 @@ Page({
   clearAllData() {
     wx.showModal({
       title: '清空所有错题',
-      content: '⚠️ 此操作将删除你所有错题记录和关联图片，且无法恢复。\n\n确定要清空吗？',
+      content: '此操作将删除你所有错题记录和关联图片，且无法恢复。确定要清空吗？',
       confirmColor: '#FF3B30',
       confirmText: '清空',
       cancelText: '取消',
@@ -137,7 +156,7 @@ Page({
   showAbout() {
     wx.showModal({
       title: '关于小错题家',
-      content: '小错题家 v1.0.0\n\n面向小学 1-6 年级的错题归纳与 AI 练习生成工具。\n\n数据安全存储于微信云服务，按用户隔离。',
+      content: '小错题家 v1.0.0，面向小学 1-6 年级的错题归纳与 AI 练习生成工具。数据安全存储于微信云服务，按用户隔离。',
       showCancel: false,
       confirmText: '知道了'
     });
