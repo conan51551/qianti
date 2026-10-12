@@ -1,4 +1,5 @@
 const { call } = require('../../utils/cloud');
+const { formatDate } = require('../../utils/util');
 
 Page({
   data: {
@@ -11,7 +12,8 @@ Page({
     masteredCount: 0,
     familiarCount: 0,
     practicingCount: 0,
-    untrackedCount: 0
+    untrackedCount: 0,
+    todayReview: []
   },
 
   _pollTimer: null,
@@ -26,6 +28,12 @@ Page({
 
   onUnload() {
     this._stopPolling();
+  },
+
+  onPullDownRefresh() {
+    this.loadMistakes().then(() => {
+      wx.stopPullDownRefresh();
+    });
   },
 
   async loadMistakes() {
@@ -44,7 +52,7 @@ Page({
     const ms = (rawList || []).map(x => ({
       ...x,
       masteryLevel: typeof x.mastery === 'number' ? x.mastery : 0,
-      createdAtText: this.formatDate(x.createdAt)
+      createdAtText: formatDate(x.createdAt)
     }));
     const subjects = ['全部', ...new Set(ms.map(x => x.subject).filter(Boolean))];
 
@@ -57,6 +65,18 @@ Page({
       else untracked++;
     });
 
+    // Today's review: mastery < 2, created within last 3 days, sorted oldest first
+    const now = Date.now();
+    const threeDays = 3 * 24 * 60 * 60 * 1000;
+    const todayReview = ms
+      .filter(m => m.masteryLevel < 2 && (now - (m.createdAt || 0)) < threeDays)
+      .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0))
+      .slice(0, 5)
+      .map(m => ({
+        ...m,
+        reviewText: m.questionText ? m.questionText.slice(0, 30) : '照片错题'
+      }));
+
     const activeSubject = this.data.activeSubject || '全部';
     this.setData({
       mistakes: ms,
@@ -68,6 +88,7 @@ Page({
       familiarCount: familiar,
       practicingCount: practicing,
       untrackedCount: untracked,
+      todayReview,
       loading: false
     });
   },
@@ -90,7 +111,6 @@ Page({
         const oldMap = {};
         this.data.mistakes.forEach(m => { oldMap[m._id] = m; });
 
-        // Check if any pending items changed status
         let changed = false;
         newList.forEach(m => {
           const old = oldMap[m._id];
@@ -103,9 +123,7 @@ Page({
           this._applyMistakes(newList);
           this._checkPending();
         }
-      } catch (_) {
-        // ignore poll errors
-      }
+      } catch (_) {}
     }, 4000);
   },
 
@@ -114,16 +132,6 @@ Page({
       clearInterval(this._pollTimer);
       this._pollTimer = null;
     }
-  },
-
-  formatDate(ts) {
-    const d = new Date(ts);
-    const now = new Date();
-    const diff = (now - d) / (1000 * 60 * 60 * 24);
-    if (diff < 1) return '今天';
-    if (diff < 2) return '昨天';
-    if (diff < 7) return Math.floor(diff) + '天前';
-    return (d.getMonth() + 1) + '月' + d.getDate() + '日';
   },
 
   filterSubject(e) {
@@ -166,6 +174,13 @@ Page({
     });
   },
 
+  reviewItem(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/mistake-detail/mistake-detail?id=' + id
+    });
+  },
+
   deleteMistake(e) {
     const id = e.currentTarget.dataset.id;
     wx.showModal({
@@ -179,10 +194,8 @@ Page({
         wx.showLoading({ title: '删除中' });
         try {
           await call('deleteMistake', { id });
-          this.setData({
-            mistakes: this.data.mistakes.filter(x => x._id !== id),
-            visibleMistakes: this.data.visibleMistakes.filter(x => x._id !== id)
-          });
+          const remaining = this.data.mistakes.filter(x => x._id !== id);
+          this._applyMistakes(remaining);
           wx.showToast({ title: '已删除' });
         } catch (_) {
           wx.showToast({ title: '删除失败', icon: 'none' });

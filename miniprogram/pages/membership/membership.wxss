@@ -1,0 +1,225 @@
+/* ============================================
+   会员中心 — Apple Design Language
+   ============================================ */
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 60rpx 40rpx 40rpx;
+  background: linear-gradient(180deg, rgba(0, 122, 255, 0.06) 0%, rgba(0, 122, 255, 0) 100%);
+  border-radius: 0 0 40rpx 40rpx;
+}
+
+.hero__title {
+  display: block;
+  font-size: 56rpx;
+  font-weight: 800;
+  color: #1C1C1E;
+  letter-spacing: -1rpx;
+}
+
+.hero__subtitle {
+  display: block;
+  font-size: 30rpx;
+  color: #8E8E93;
+  margin-top: 12rpx;
+}
+
+/* Plans */
+.plans {
+  margin-top: 12rpx;
+}
+
+.plan-card {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 36rpx;
+  margin-top: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-card--highlight {
+  border: 4rpx solid #007AFF;
+}
+
+.plan-card--best {
+  border: 4rpx solid #34C759;
+}
+
+.plan-card__badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #007AFF;
+  color: #FFFFFF;
+  font-size: 22rpx;
+  font-weight: 600;
+  padding: 8rpx 24rpx;
+  border-radius: 0 24rpx 0 24rpx;
+}
+
+.plan-card__badge--green {
+  background: #34C759;
+}
+
+.plan-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.plan-card__name {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1C1C1E;
+}
+
+.plan-card__price-wrap {
+  display: flex;
+  align-items: baseline;
+}
+
+.plan-card__price {
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #1C1C1E;
+  letter-spacing: -1rpx;
+}
+
+.plan-card__unit {
+  font-size: 26rpx;
+  color: #8E8E93;
+  margin-left: 4rpx;
+}
+
+.plan-card__desc {
+  display: block;
+  font-size: 26rpx;
+  color: #8E8E93;
+  margin-top: 8rpx;
+}
+
+.plan-card__savings {
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.plan-card__original {
+  font-size: 26rpx;
+  color: #C7C7CC;
+  text-decoration: line-through;
+}
+
+.plan-card__save {
+  font-size: 24rpx;
+  color: #34C759;
+  font-weight: 600;
+  margin-left: 12rpx;
+}
+
+.plan-card__features {
+  margin-top: 24rpx;
+}
+
+.feature-row {
+  display: flex;
+  align-items: center;
+  padding: 12rpx 0;
+}
+
+.feature-row__check {
+  font-size: 28rpx;
+  color: #34C759;
+  font-weight: 600;
+  margin-right: 16rpx;
+  width: 40rpx;
+  text-align: center;
+}
+
+.feature-row__check--gray {
+  color: #C7C7CC;
+}
+
+.feature-row__text {
+  font-size: 28rpx;
+  color: #1C1C1E;
+}
+
+.plan-card__btn {
+  margin-top: 28rpx;
+}
+
+/* Comparison Table */
+.compare-row {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 36rpx;
+  min-height: 80rpx;
+}
+
+.compare-row--header {
+  font-weight: 600;
+  font-size: 26rpx;
+  color: #8E8E93;
+}
+
+.compare-row__name {
+  flex: 1;
+  font-size: 28rpx;
+  color: #1C1C1E;
+}
+
+.compare-row__col {
+  width: 120rpx;
+  text-align: center;
+  font-size: 26rpx;
+}
+
+/* FAQ */
+.faq-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28rpx 36rpx;
+  min-height: 80rpx;
+}
+
+.faq-row__q {
+  font-size: 30rpx;
+  color: #1C1C1E;
+  font-weight: 500;
+  flex: 1;
+}
+
+.faq-row__arrow {
+  font-size: 36rpx;
+  color: #C7C7CC;
+  font-weight: 300;
+  transition: transform 0.2s ease;
+}
+
+.faq-row__arrow--open {
+  transform: rotate(90deg);
+}
+
+.faq-row__a {
+  padding: 0 36rpx 28rpx;
+  font-size: 26rpx;
+  color: #8E8E93;
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer-note {
+  text-align: center;
+  margin-top: 40rpx;
+  padding-bottom: 20rpx;
+}
+
+.footer-note text {
+  font-size: 22rpx;
+  color: #C7C7CC;
+}

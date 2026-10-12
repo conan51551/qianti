@@ -25,9 +25,8 @@ Page({
     this.setData({ phase: 'loading', userAnswer: '', isCorrect: false, resultMastery: 0 });
 
     try {
-      // Get the mistake data
-      const listRes = await call('listMistakes');
-      const mistake = (listRes.data || []).find(m => m._id === this.data.mistakeId);
+      // Get the mistake data via dedicated function
+      const mistake = await call('getMistake', { id: this.data.mistakeId });
 
       if (!mistake) {
         this.setData({ phase: 'error' });
@@ -37,9 +36,7 @@ Page({
       this.setData({ mistake });
 
       // Generate a new practice question
-      wx.showLoading({ title: '出题中' });
       const q = await call('generateQuestion', mistake);
-      wx.hideLoading();
 
       if (!q || !q.questionText) {
         this.setData({ phase: 'error' });
@@ -56,7 +53,6 @@ Page({
         phase: 'question'
       });
     } catch (e) {
-      wx.hideLoading();
       this.setData({ phase: 'error' });
     }
   },
@@ -108,10 +104,8 @@ Page({
     if (!user || !correct) return false;
     const u = user.replace(/\s+/g, '').toLowerCase();
     const c = correct.replace(/\s+/g, '').toLowerCase();
-    if (u === c) return true;
-    if (c.indexOf(u) >= 0 && u.length >= 2) return true;
-    if (u.indexOf(c) >= 0 && c.length >= 2) return true;
-    return false;
+    // Exact match only — no substring matching to avoid "10" matching "100"
+    return u === c;
   },
 
   goBack() {

@@ -6,7 +6,8 @@
     "pages/knowledge/knowledge",
     "pages/mistake-detail/mistake-detail",
     "pages/practice/practice",
-    "pages/stats/stats"
+    "pages/stats/stats",
+    "pages/membership/membership"
   ],
   "window": {
     "navigationBarTitleText": "小错题家",

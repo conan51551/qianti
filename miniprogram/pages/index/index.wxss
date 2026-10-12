@@ -312,3 +312,49 @@
 .mastery-dot-mini--active {
   background: #34C759;
 }
+
+/* Today's Review Section */
+.review-scroll {
+  white-space: nowrap;
+  margin-top: 8rpx;
+}
+
+.review-card {
+  display: inline-flex;
+  flex-direction: column;
+  width: 280rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-right: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  vertical-align: top;
+}
+
+.review-card__header {
+  display: flex;
+  margin-bottom: 16rpx;
+}
+
+.review-card__text {
+  display: block;
+  font-size: 28rpx;
+  line-height: 1.5;
+  color: #1C1C1E;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  min-height: 84rpx;
+}
+
+.review-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16rpx;
+  border-top: 1rpx solid #F2F2F7;
+  padding-top: 16rpx;
+}

@@ -1,15 +1,20 @@
 const { call } = require('../../utils/cloud');
 
+const GRADE_OPTIONS = ['一年级', '二年级', '三年级', '四年级', '五年级', '六年级'];
+
 Page({
   data: {
     form: { name: '', age: '', grade: '' },
     loggedIn: false,
     loading: false,
-    saving: false
+    saving: false,
+    gradeOptions: GRADE_OPTIONS,
+    gradeIndex: 2
   },
 
   onShow() {
-    if (this.data.loggedIn) {
+    if (!this.data.loggedIn && !this.data._loaded) {
+      this.setData({ _loaded: true });
       this.login();
     }
   },
@@ -19,7 +24,12 @@ Page({
     this.setData({ loading: true });
     try {
       const r = await call('login');
-      this.setData({ loggedIn: true, form: r.profile });
+      const gradeIndex = r.profile.grade ? GRADE_OPTIONS.indexOf(r.profile.grade) : 2;
+      this.setData({
+        loggedIn: true,
+        form: r.profile,
+        gradeIndex: gradeIndex >= 0 ? gradeIndex : 2
+      });
       getApp().globalData.profile = r.profile;
     } catch (e) {
       wx.showToast({ title: e.message || '登录失败', icon: 'none' });
@@ -30,6 +40,14 @@ Page({
 
   onInput(e) {
     this.setData({ [`form.${e.currentTarget.dataset.key}`]: e.detail.value });
+  },
+
+  onGradeChange(e) {
+    const idx = Number(e.detail.value);
+    this.setData({
+      gradeIndex: idx,
+      'form.grade': GRADE_OPTIONS[idx]
+    });
   },
 
   async save() {
@@ -51,6 +69,69 @@ Page({
     } finally {
       this.setData({ saving: false });
     }
+  },
+
+  openMembership() {
+    wx.navigateTo({ url: '/pages/membership/membership' });
+  },
+
+  showPrivacy() {
+    wx.showModal({
+      title: '隐私说明',
+      content: '小错题家高度重视你的隐私：\n\n1. 仅收集与错题相关的数据（题目图片、文字、答案），不收集其他任何信息。\n2. 所有数据存储在微信云服务，按微信用户身份隔离，仅你本人可访问。\n3. 图片仅用于 AI 分析错题，分析完成后图片在云存储中保留以便你查看，可随时删除。\n4. AI 分析使用第三方接口，不会泄露你的个人身份信息。\n5. 你可以随时导出或清空所有数据。',
+      showCancel: false,
+      confirmText: '知道了',
+      confirmColor: '#007AFF'
+    });
+  },
+
+  async exportMistakes() {
+    wx.showLoading({ title: '导出中' });
+    try {
+      const r = await call('exportMistakes');
+      const json = JSON.stringify(r.data, null, 2);
+      const fs = wx.getFileSystemManager();
+      const path = `${wx.env.USER_DATA_PATH}/mistakes_export_${Date.now()}.json`;
+      fs.writeFileSync(path, json, 'utf8');
+      wx.hideLoading();
+      wx.shareFileMessage({
+        filePath: path,
+        success: () => {},
+        fail: () => {
+          wx.showModal({
+            title: '导出成功',
+            content: `已导出 ${r.count} 条错题记录。文件已保存到应用目录。`,
+            showCancel: false,
+            confirmText: '知道了'
+          });
+        }
+      });
+    } catch (e) {
+      wx.hideLoading();
+      wx.showToast({ title: '导出失败', icon: 'none' });
+    }
+  },
+
+  clearAllData() {
+    wx.showModal({
+      title: '清空所有错题',
+      content: '⚠️ 此操作将删除你所有错题记录和关联图片，且无法恢复。\n\n确定要清空吗？',
+      confirmColor: '#FF3B30',
+      confirmText: '清空',
+      cancelText: '取消',
+      success: async r => {
+        if (!r.confirm) return;
+        wx.showLoading({ title: '清空中' });
+        try {
+          const result = await call('clearMistakes');
+          wx.hideLoading();
+          wx.showToast({ title: `已清空 ${result.deletedMistakes} 条` });
+        } catch (e) {
+          wx.hideLoading();
+          wx.showToast({ title: '操作失败', icon: 'none' });
+        }
+      }
+    });
   },
 
   showAbout() {

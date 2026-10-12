@@ -6,9 +6,8 @@
   </view>
 
   <!-- Photo Picker -->
-  <view class="photo-area" bindtap="chooseImage">
-    <image wx:if="{{localImage}}" class="photo-area__image" src="{{localImage}}" mode="aspectFit"/>
-    <view wx:else class="photo-area__placeholder">
+  <view class="photo-area" bindtap="chooseImage" wx:if="{{!localImage}}">
+    <view class="photo-area__placeholder">
       <view class="photo-area__icon-wrapper">
         <text class="photo-area__icon">📷</text>
       </view>
@@ -16,7 +15,13 @@
       <text class="photo-area__hint">尽量拍清题目，保留完整内容</text>
     </view>
   </view>
-  <text wx:if="{{localImage}}" class="photo-area__tip" bindtap="chooseImage">点击照片可重新选择</text>
+  <view class="photo-preview" wx:if="{{localImage}}">
+    <image class="photo-preview__image" src="{{localImage}}" mode="aspectFit" bindtap="previewLocalImage"/>
+    <view class="photo-preview__actions">
+      <text class="photo-preview__btn photo-preview__btn--change" bindtap="chooseImage">更换</text>
+      <text class="photo-preview__btn photo-preview__btn--remove" bindtap="removeImage">删除</text>
+    </view>
+  </view>
 
   <!-- Grade & Subject -->
   <view class="section-header">
@@ -24,15 +29,21 @@
   </view>
 
   <view class="group-card">
-    <view class="group-row">
-      <text class="group-row__label">年级</text>
-      <input class="group-row__input" placeholder="如：三年级" value="{{form.grade}}" data-key="grade" bindinput="onInput"/>
-    </view>
+    <picker mode="selector" range="{{gradeOptions}}" value="{{gradeIndex}}" bindchange="onGradeChange">
+      <view class="group-row">
+        <text class="group-row__label">年级</text>
+        <text class="group-row__value">{{gradeOptions[gradeIndex] || '请选择'}}</text>
+        <text class="group-row__arrow">›</text>
+      </view>
+    </picker>
     <view class="separator"></view>
-    <view class="group-row">
-      <text class="group-row__label">学科</text>
-      <input class="group-row__input" value="{{form.subject}}" data-key="subject" bindinput="onInput" placeholder="如：数学"/>
-    </view>
+    <picker mode="selector" range="{{subjectOptions}}" value="{{subjectIndex}}" bindchange="onSubjectChange">
+      <view class="group-row">
+        <text class="group-row__label">学科</text>
+        <text class="group-row__value">{{subjectOptions[subjectIndex]}}</text>
+        <text class="group-row__arrow">›</text>
+      </view>
+    </picker>
   </view>
 
   <!-- Question Notes -->
@@ -43,7 +54,7 @@
 
   <view class="group-card">
     <view class="group-row group-row--textarea">
-      <textarea class="group-row__textarea" placeholder="补充题目文字或想记录的内容" value="{{form.questionText}}" data-key="questionText" bindinput="onInput"/>
+      <textarea class="group-row__textarea" placeholder="补充题目文字或想记录的内容" value="{{form.questionText}}" data-key="questionText" bindinput="onInput" maxlength="500"/>
     </view>
   </view>
 
@@ -67,4 +78,5 @@
 
   <!-- Save Button -->
   <button class="btn-primary" disabled="{{saving}}" loading="{{saving}}" bindtap="save">保存到错题本</button>
+  <view class="safe-area-bottom"></view>
 </view>

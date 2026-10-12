@@ -42,6 +42,34 @@
     </view>
   </view>
 
+  <!-- Today's Review Section -->
+  <view wx:if="{{todayReview.length > 0}}" class="review-section">
+    <view class="section-header" style="margin-top: 28rpx;">
+      <text class="section-header__title">今日待复习</text>
+      <text class="text-tertiary text-small">{{todayReview.length}} 道</text>
+    </view>
+    <scroll-view scroll-x class="review-scroll">
+      <view 
+        wx:for="{{todayReview}}" 
+        wx:key="_id" 
+        class="review-card"
+        bindtap="reviewItem" 
+        data-id="{{item._id}}"
+      >
+        <view class="review-card__header">
+          <text class="pill pill--blue">{{item.subject}}</text>
+          <text class="pill">{{item.grade}}</text>
+        </view>
+        <text class="review-card__text">{{item.reviewText}}</text>
+        <view class="review-card__footer">
+          <text class="text-tertiary text-tiny">{{item.createdAtText}}</text>
+          <text class="text-tiny text-orange" wx:if="{{item.masteryLevel === 0}}">未练习</text>
+          <text class="text-tiny text-orange" wx:if="{{item.masteryLevel === 1}}">练习中</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
   <!-- Subject Segmented Control -->
   <scroll-view scroll-x class="segmented" wx:if="{{subjects.length > 1}}">
     <view 

@@ -1,0 +1,195 @@
+<view class="page">
+  <!-- Hero Header -->
+  <view class="hero">
+    <text class="hero__title">小错题家 Pro</text>
+    <text class="hero__subtitle">让 AI 帮孩子把每一道错题吃透</text>
+  </view>
+
+  <!-- Pricing Cards -->
+  <view class="plans">
+    <!-- Free Plan -->
+    <view class="plan-card">
+      <view class="plan-card__header">
+        <text class="plan-card__name">体验版</text>
+        <text class="plan-card__price">免费</text>
+      </view>
+      <text class="plan-card__desc">适合偶尔记录错题</text>
+      <view class="plan-card__features">
+        <view class="feature-row">
+          <text class="feature-row__check feature-row__check--gray">○</text>
+          <text class="feature-row__text">每月 5 次 AI 错题分析</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check feature-row__check--gray">○</text>
+          <text class="feature-row__text">错题本管理（拍照/手动录入）</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check feature-row__check--gray">○</text>
+          <text class="feature-row__text">知识大纲查看</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check feature-row__check--gray">○</text>
+          <text class="feature-row__text">每月 3 次变式题练习</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Monthly Plan -->
+    <view class="plan-card plan-card--highlight">
+      <view class="plan-card__badge">热门</view>
+      <view class="plan-card__header">
+        <text class="plan-card__name">月度会员</text>
+        <view class="plan-card__price-wrap">
+          <text class="plan-card__price">¥19.9</text>
+          <text class="plan-card__unit">/月</text>
+        </view>
+      </view>
+      <text class="plan-card__desc">适合持续复习巩固</text>
+      <view class="plan-card__features">
+        <view class="feature-row">
+          <text class="feature-row__check">✓</text>
+          <text class="feature-row__text">无限次 AI 错题分析</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check">✓</text>
+          <text class="feature-row__text">无限次 AI 变式题生成</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check">✓</text>
+          <text class="feature-row__text">掌握度追踪统计</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check">✓</text>
+          <text class="feature-row__text">数据导出功能</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check">✓</text>
+          <text class="feature-row__text">优先 AI 分析速度</text>
+        </view>
+      </view>
+      <button class="btn-primary plan-card__btn" bindtap="subscribeMonthly">开通月度会员</button>
+    </view>
+
+    <!-- Annual Plan -->
+    <view class="plan-card plan-card--best">
+      <view class="plan-card__badge plan-card__badge--green">超值</view>
+      <view class="plan-card__header">
+        <text class="plan-card__name">年度会员</text>
+        <view class="plan-card__price-wrap">
+          <text class="plan-card__price">¥168</text>
+          <text class="plan-card__unit">/年</text>
+        </view>
+      </view>
+      <view class="plan-card__savings">
+        <text class="plan-card__original">原价 ¥238.8</text>
+        <text class="plan-card__save">立省 ¥70.8</text>
+      </view>
+      <text class="plan-card__desc">日均不到 5 毛钱</text>
+      <view class="plan-card__features">
+        <view class="feature-row">
+          <text class="feature-row__check">✓</text>
+          <text class="feature-row__text">月度会员全部功能</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check">✓</text>
+          <text class="feature-row__text">最高优先级 AI 分析</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check">✓</text>
+          <text class="feature-row__text">专属学习报告（月度/季度）</text>
+        </view>
+        <view class="feature-row">
+          <text class="feature-row__check">✓</text>
+          <text class="feature-row__text">新增学科优先体验</text>
+        </view>
+      </view>
+      <button class="btn-primary plan-card__btn" bindtap="subscribeAnnual">开通年度会员</button>
+    </view>
+  </view>
+
+  <!-- Feature Comparison -->
+  <view class="section-header" style="margin-top: 48rpx;">
+    <text class="section-header__title">功能对比</text>
+  </view>
+
+  <view class="group-card">
+    <view class="compare-row compare-row--header">
+      <text class="compare-row__name">功能</text>
+      <text class="compare-row__col">体验</text>
+      <text class="compare-row__col">月度</text>
+      <text class="compare-row__col">年度</text>
+    </view>
+    <view class="separator"></view>
+    <view class="compare-row">
+      <text class="compare-row__name">AI 错题分析</text>
+      <text class="compare-row__col text-tertiary">5次/月</text>
+      <text class="compare-row__col text-green">无限</text>
+      <text class="compare-row__col text-green">无限</text>
+    </view>
+    <view class="separator"></view>
+    <view class="compare-row">
+      <text class="compare-row__name">变式题练习</text>
+      <text class="compare-row__col text-tertiary">3次/月</text>
+      <text class="compare-row__col text-green">无限</text>
+      <text class="compare-row__col text-green">无限</text>
+    </view>
+    <view class="separator"></view>
+    <view class="compare-row">
+      <text class="compare-row__name">掌握度统计</text>
+      <text class="compare-row__col text-tertiary">—</text>
+      <text class="compare-row__col text-green">✓</text>
+      <text class="compare-row__col text-green">✓</text>
+    </view>
+    <view class="separator"></view>
+    <view class="compare-row">
+      <text class="compare-row__name">数据导出</text>
+      <text class="compare-row__col text-tertiary">—</text>
+      <text class="compare-row__col text-green">✓</text>
+      <text class="compare-row__col text-green">✓</text>
+    </view>
+    <view class="separator"></view>
+    <view class="compare-row">
+      <text class="compare-row__name">学习报告</text>
+      <text class="compare-row__col text-tertiary">—</text>
+      <text class="compare-row__col text-tertiary">—</text>
+      <text class="compare-row__col text-green">✓</text>
+    </view>
+    <view class="separator"></view>
+    <view class="compare-row">
+      <text class="compare-row__name">优先 AI 速度</text>
+      <text class="compare-row__col text-tertiary">—</text>
+      <text class="compare-row__col text-green">✓</text>
+      <text class="compare-row__col text-green">✓✓</text>
+    </view>
+  </view>
+
+  <!-- FAQ -->
+  <view class="section-header" style="margin-top: 48rpx;">
+    <text class="section-header__title">常见问题</text>
+  </view>
+
+  <view class="group-card">
+    <view class="faq-row" bindtap="toggleFaq" data-id="0">
+      <text class="faq-row__q">会员可以随时取消吗？</text>
+      <text class="faq-row__arrow {{faqOpen0 ? 'faq-row__arrow--open' : ''}}">›</text>
+    </view>
+    <view class="faq-row__a" wx:if="{{faqOpen0}}">可以。在微信「服务」-「钱包」-「自动续费」中管理订阅。取消后会员有效期至当前周期结束。</view>
+    <view class="separator"></view>
+    <view class="faq-row" bindtap="toggleFaq" data-id="1">
+      <text class="faq-row__q">AI 分析次数怎么计算？</text>
+      <text class="faq-row__arrow {{faqOpen1 ? 'faq-row__arrow--open' : ''}}">›</text>
+    </view>
+    <view class="faq-row__a" wx:if="{{faqOpen1}}">每拍照录入一道错题并触发 AI 分析算 1 次。重复分析同一道题不重复计数。每月 1 号重置免费额度。</view>
+    <view class="separator"></view>
+    <view class="faq-row" bindtap="toggleFaq" data-id="2">
+      <text class="faq-row__q">数据安全吗？</text>
+      <text class="faq-row__arrow {{faqOpen2 ? 'faq-row__arrow--open' : ''}}">›</text>
+    </view>
+    <view class="faq-row__a" wx:if="{{faqOpen2}}">所有数据存储在微信云服务，按微信用户身份隔离，仅你本人可访问。不收集不分析任何非错题相关数据。</view>
+  </view>
+
+  <view class="footer-note">
+    <text>付费后即视为同意《用户协议》和《隐私政策》</text>
+  </view>
+  <view class="safe-area-bottom"></view>
+</view>

@@ -1,4 +1,5 @@
 const { call } = require('../../utils/cloud');
+const { formatDate, masteryLabel, masteryColor } = require('../../utils/util');
 
 Page({
   data: {
@@ -31,40 +32,26 @@ Page({
   async loadDetail() {
     this.setData({ loading: true, error: false });
     try {
-      const r = await call('listMistakes');
-      const mistake = (r.data || []).find(m => m._id === this.data.mistakeId);
+      const mistake = await call('getMistake', { id: this.data.mistakeId });
       if (!mistake) {
         this.setData({ loading: false, error: true });
         return;
       }
 
       const level = typeof mistake.mastery === 'number' ? mistake.mastery : 0;
-      const labels = ['未练习', '练习中', '较熟悉', '已掌握'];
-      const colors = ['', 'pill--orange', 'pill--blue', 'pill--green'];
 
       this.setData({
         mistake,
         masteryLevel: level,
-        masteryLabel: labels[level] || '未练习',
-        masteryColor: colors[level] || '',
-        createdAtText: this.formatDate(mistake.createdAt),
-        lastPracticeText: mistake.lastPracticeAt ? this.formatDate(mistake.lastPracticeAt) : '',
+        masteryLabel: masteryLabel(level),
+        masteryColor: masteryColor(level),
+        createdAtText: formatDate(mistake.createdAt),
+        lastPracticeText: mistake.lastPracticeAt ? formatDate(mistake.lastPracticeAt) : '',
         loading: false
       });
     } catch (e) {
       this.setData({ loading: false, error: true });
     }
-  },
-
-  formatDate(ts) {
-    if (!ts) return '';
-    const d = new Date(ts);
-    const now = new Date();
-    const diff = (now - d) / (1000 * 60 * 60 * 24);
-    if (diff < 1) return '今天';
-    if (diff < 2) return '昨天';
-    if (diff < 7) return Math.floor(diff) + '天前';
-    return (d.getMonth() + 1) + '月' + d.getDate() + '日';
   },
 
   previewImage() {
