@@ -1,8 +1,11 @@
 <view class="page">
   <!-- Large Title Header -->
   <view class="nav-area">
-    <text class="large-title">错题本</text>
-    <text class="large-title-subtitle">把每一次出错，变成下一次进步</text>
+    <view class="nav-area__title">
+      <text class="large-title">错题本</text>
+      <text class="large-title-subtitle">把每一次出错，变成下一次进步</text>
+    </view>
+    <button class="share-btn" open-type="share">分享</button>
   </view>
 
   <!-- Summary Card -->

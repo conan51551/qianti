@@ -4,7 +4,30 @@
 
 /* Navigation Area */
 .nav-area {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   padding: 20rpx 8rpx 0;
+}
+
+.nav-area__title {
+  flex: 1;
+}
+
+.share-btn {
+  background: rgba(0, 122, 255, 0.08);
+  color: #007AFF;
+  font-size: 26rpx;
+  font-weight: 600;
+  padding: 12rpx 28rpx;
+  border-radius: 100rpx;
+  line-height: 1.5;
+  margin-top: 8rpx;
+  flex-shrink: 0;
+}
+
+.share-btn::after {
+  border: 0;
 }
 
 /* Summary Card */

@@ -89,5 +89,13 @@ Page({
         }
       }
     });
+  },
+
+  onShareAppMessage() {
+    return {
+      title: '小错题家 - AI 帮你分析错因、提炼知识点',
+      path: '/pages/index/index',
+      imageUrl: ''
+    };
   }
 });

@@ -180,11 +180,25 @@
   border-radius: 28rpx;
   font-size: 34rpx;
   font-weight: 600;
-  height: 100rpx;
-  line-height: 100rpx;
+  padding: 28rpx 0;
   margin-top: 24rpx;
 }
 
 .btn-secondary::after {
+  border: 0;
+}
+
+/* Share Button */
+.btn-share {
+  background: transparent;
+  color: #8E8E93;
+  border-radius: 28rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  padding: 24rpx 0;
+  margin-top: 12rpx;
+}
+
+.btn-share::after {
   border: 0;
 }

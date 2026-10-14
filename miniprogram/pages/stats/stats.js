@@ -112,5 +112,27 @@ Page({
     wx.navigateTo({
       url: '/pages/mistake-detail/mistake-detail?id=' + id
     });
+  },
+
+  onShareAppMessage() {
+    const total = this.data.total || 0;
+    const mastered = this.data.mastered || 0;
+    const title = total > 0
+      ? '我用小错题家收录了' + total + '道错题，已掌握' + mastered + '道'
+      : '小错题家 - AI 错题分析与变式题练习';
+    return {
+      title: title,
+      path: '/pages/index/index',
+      imageUrl: ''
+    };
+  },
+
+  onShareTimeline() {
+    const total = this.data.total || 0;
+    const mastered = this.data.mastered || 0;
+    const title = total > 0
+      ? '我已收录' + total + '道错题，掌握' + mastered + '道，用小错题家精准复习'
+      : '小错题家 - AI 错题分析与变式题练习';
+    return { title: title, query: '' };
   }
 });

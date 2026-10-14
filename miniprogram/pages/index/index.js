@@ -204,5 +204,20 @@ Page({
         }
       }
     });
+  },
+
+  onShareAppMessage() {
+    return {
+      title: '小错题家 - 拍下错题，AI 自动分析错因并出变式题',
+      path: '/pages/index/index',
+      imageUrl: ''
+    };
+  },
+
+  onShareTimeline() {
+    return {
+      title: '小错题家 - 拍下错题，AI 自动分析错因并出变式题',
+      query: ''
+    };
   }
 });

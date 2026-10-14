@@ -65,5 +65,13 @@ Page({
     } catch (_) {
       this.setData({ loading: false, error: true });
     }
+  },
+
+  onShareAppMessage() {
+    return {
+      title: '小错题家 - AI 自动提炼知识点，按知识模块归类复习',
+      path: '/pages/index/index',
+      imageUrl: ''
+    };
   }
 });

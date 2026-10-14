@@ -102,5 +102,6 @@
     <!-- Actions -->
     <button class="btn-primary" bindtap="generate">再练一道</button>
     <button class="btn-secondary" bindtap="goBack">返回错题本</button>
+    <button class="btn-share" open-type="share">分享给朋友</button>
   </block>
 </view>

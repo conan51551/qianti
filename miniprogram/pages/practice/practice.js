@@ -112,5 +112,17 @@ Page({
     wx.navigateBack({
       fail: () => wx.switchTab({ url: '/pages/index/index' })
     });
+  },
+
+  onShareAppMessage() {
+    const correct = this.data.isCorrect;
+    const title = this.data.phase === 'result'
+      ? (correct ? '我在小错题家答对了一道变式题，继续加油！' : '这道变式题有点难，再来一次！')
+      : '小错题家 - AI 出变式题帮你精准练习';
+    return {
+      title: title,
+      path: '/pages/index/index',
+      imageUrl: ''
+    };
   }
 });

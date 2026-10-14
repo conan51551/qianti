@@ -160,5 +160,13 @@ Page({
       showCancel: false,
       confirmText: '知道了'
     });
+  },
+
+  onShareAppMessage() {
+    return {
+      title: '小错题家 - 把每一次出错变成下一次进步',
+      path: '/pages/index/index',
+      imageUrl: ''
+    };
   }
 });
